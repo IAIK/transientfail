@@ -1,716 +1,377 @@
+<!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <title>Transient Fail</title>
-      <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel=stylesheet" />
-      <link href="css/style.css" rel="stylesheet">
-   </head>
-   <body>
-      <a class="btn btn-secondary btn-lg fixed-bottom" href="https://github.com/IAIK/transientfail/pulls">Want to add/change something?</a>
-      <div class="text-center">
-         <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1008.9" height="597.08" version="1.1" viewBox="0 0 1008.9067 597.08398" xml:space="preserve" id="svg866" sodipodi:docname="tree.svg" inkscape:version="0.92.3 (2405546, 2018-03-11)">
-            <sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1916" inkscape:window-height="968" id="namedview868" showgrid="false" inkscape:zoom="1.3480027" inkscape:cx="513.97723" inkscape:cy="358.62891" inkscape:window-x="0" inkscape:window-y="90" inkscape:window-maximized="0" inkscape:current-layer="a162" />
-            <metadata id="metadata2">
-               <rdf:RDF>
-                  <cc:Work rdf:about="">
-                     <dc:format>image/svg+xml</dc:format>
-                     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-                     <dc:title />
-                  </cc:Work>
-               </rdf:RDF>
-            </metadata>
-            <defs id="defs28">
-               <pattern id="f" width="4.98138" height="4.98138" patternTransform="translate(28.346,2.989)" patternUnits="userSpaceOnUse">
-                  <path d="m0 2.9888 3.0885-3.0884" fill="none" stroke="#6f6" stroke-miterlimit="10" stroke-width=".3985" id="path4" />
-               </pattern>
-               <pattern id="e" width="4.98138" height="4.98138" patternTransform="translate(28.346,2.989)" patternUnits="userSpaceOnUse">
-                  <path d="m0 2.9888 3.0885-3.0884" fill="none" stroke="#6f6" stroke-miterlimit="10" stroke-width=".3985" id="path7" />
-               </pattern>
-               <pattern id="d" width="4.98138" height="4.98138" patternTransform="translate(28.346,2.989)" patternUnits="userSpaceOnUse">
-                  <path d="m0 2.9888 3.0885-3.0884" fill="none" stroke="#6f6" stroke-miterlimit="10" stroke-width=".3985" id="path10" />
-               </pattern>
-               <pattern id="c" width="4.98138" height="4.98138" patternTransform="translate(28.346,2.989)" patternUnits="userSpaceOnUse">
-                  <path d="m0 2.9888 3.0885-3.0884" fill="none" stroke="#6f6" stroke-miterlimit="10" stroke-width=".3985" id="path13" />
-               </pattern>
-               <pattern id="b" width="4.98138" height="4.98138" patternTransform="translate(28.346,2.989)" patternUnits="userSpaceOnUse">
-                  <path d="m0 2.9888 3.0885-3.0884" fill="none" stroke="#6f6" stroke-miterlimit="10" stroke-width=".3985" id="path16" />
-               </pattern>
-               <pattern id="a" width="4.98138" height="4.98138" patternTransform="translate(28.346,2.989)" patternUnits="userSpaceOnUse">
-                  <path d="m0 2.9888 3.0885-3.0884" fill="none" stroke="#6f6" stroke-miterlimit="10" stroke-width=".3985" id="path19" />
-               </pattern>
-               <clipPath id="g">
-                  <path d="m0 0h224.02v214.22h-224.02z" id="path22" />
-               </clipPath>
-               <clipPath id="h">
-                  <path d="m0 0h144v144h-144z" id="path25" />
-               </clipPath>
-            </defs>
-            <g transform="matrix(1.3333 0 0 -1.3333 43.929 259.51)" id="g864">
-               <a data-container="body" data-html="true" data-content="We split the tree based on what the cause for entering transient execution is. If the cause is the lazy retirement of a fault, we have a Meltdown-type attack. If the cause is the prediction on the outcome of a branch, we have a Spectre-type attack.
-                  <p>Source: <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.</a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="1" title="" data-original-title="Transient cause?" id="a42">
-                  <path d="m28.263 15.276h-56.527c-2.201 0-3.9851-1.7842-3.9851-3.9851v-22.581c0-2.201 1.7842-3.9851 3.9851-3.9851h56.527c2.201 0 3.9851 1.7842 3.9851 3.9851v22.581c0 2.201-1.7842 3.9851-3.9851 3.9851z" fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path30"/>
-                  <g transform="translate(-28.346,-2.989)" id="g40">
-                     <g transform="translate(-4.601 -250.19)" id="g38">
-                        <text transform="matrix(1 0 0 -1 5.326 256.25)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text36">
-                           <tspan x="0 8.2299595 13.723374 20.261673 27.733673 33.038197 36.774197 42.910801 50.012188" y="0" id="tspan32">Transient</tspan>
-                           <tspan x="8.7309999 14.7086 21.246899 28.718899 34.023422 40.160027" y="14.446" id="tspan34">cause?</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Spectre exploits a performance optimization in modern CPUs. Instead of waiting for the correct resolution of a branch, the CPU tries to predict the most likely outcome of the branch and starts transiently executing along the predicted path. Upon resolving the branch, the CPU discards the results of the transient execution if the prediction was wrong but does not revert changes in the microarchitecture. The prediction is based on events in the past, allowing an attacker to mistrain the predictor to leak data through the microarchitectue that should normally not be accessible to the attacker.<p>Source: <a href='https://spectreattack.com/spectre.pdf'>Kocher et al.</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.</a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Spectre" id="a122">
-                  <path d="m116.49 80.016h-119.59c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.327c0-2.2009 1.7842-3.9851 3.9851-3.9851h119.59c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.327c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path44" />
-                  <g transform="translate(24.502,67.944)" id="g54">
-                     <g transform="translate(-6.3184)" id="g52">
-                        <g transform="translate(-57.449 -321.13)" id="g50">
-                           <text transform="matrix(1 0 0 -1 57.449 321.13)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text48">
-                              <tspan x="0" y="0" id="tspan46">Spectre-type</tspan>
-                           </text>
-                        </g>
-                     </g>
-                  </g>
-               </a>
-               <g transform="translate(1.4702 4.4107)" id="g66">
-                  <g transform="translate(43.937,89.137)" id="g64">
-                     <g transform="translate(-76.884 -342.32)" id="g62">
-                        <text transform="matrix(1 0 0 -1 76.884 349.54)" fill="#404040" font-family="CMTI12" font-size="11.955px" id="text60">
-                           <tspan x="0" y="0" id="tspan56">microarchitec-</tspan>
-                           <tspan x="0" y="14.944" id="tspan58">tural buffer</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Meltdown exploits that exceptions are only raised (i.e., become architecturally visible) upon the retirement of the faulting instruction.
-                  In some microarchitectures, this property allows transient instructions ahead in the pipeline to compute on unauthorized results of the instruction that is about to suffer a fault.
-                  The CPU's in-order instruction retirement mechanism takes care to discard any architectural effects of such computations, but secrets may leak through microarchitectural covert channels.<p>Source: <a href='https://meltdownattack.com/meltdown.pdf'>Lipp et al.</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.</a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown" id="a122">
-                  <path d="m116.49-61.652h-119.59c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.46c0-2.2009 1.7842-3.9851 3.9851-3.9851h119.59c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.46c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path68" />
-                  <g transform="translate(11.932 -73.855)" id="g76">
-                     <g transform="translate(-51.11 -179.33)" id="g74">
-                        <text transform="matrix(1 0 0 -1 51.11 179.33)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text72">
-                           <tspan x="0" y="0" id="tspan70">Meltdown-type</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <g transform="translate(44.42,-96.532)" id="g84">
-                  <g transform="translate(-77.367,-156.65)" id="g82">
-                     <text transform="matrix(1,0,0,-1,77.367,156.65)" fill="#404040" font-family="CMTI12" font-size="11.955px" id="text80">
-                        <tspan x="0" y="0" id="tspan78">fault type</tspan>
-                     </text>
-                  </g>
-               </g>
-               <a data-container="body" data-html="true" data-content="Kocher et al. first introduced Spectre-PHT, an attack that poisons the Pattern History Table (PHT) to mispredict the direction (taken or not-taken) of conditional branches. Depending on the underlying microarchitecture, the PHT is accessed based on a combination of virtual address bits of the branch instruction plus a hidden Branch History Buffer (BHB) that accumulates global behavior for the last N branches on the same physical core.<p>Source: <a href='https://spectreattack.com/spectre.pdf'>Kocher et al.</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a>, <a href='http://www.cs.ucr.edu/~nael/pubs/asplos18.pdf'>Evtyushkin et al.</a>, <a href='https://www.agner.org/optimize/microarchitecture.pdf'>Agner Fog</a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Spectre-PHT" id="a98">
-                  <path d="m314.92 136.71h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.327c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.327c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path86" />
-                  <g transform="translate(207.38 124.64)" id="g96">
-                     <g transform="translate(-3.6703)" id="g94">
-                        <g transform="translate(-240.32 -377.82)" id="g92">
-                           <text transform="matrix(1 0 0 -1 240.32 377.82)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text90">
-                              <tspan x="0" y="0" id="tspan88">Spectre-PHT</tspan>
-                           </text>
-                        </g>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="In Spectre-BTB, the attacker poisons the Branch Target Buffer (BTB) to steer the transient execution to a mispredicted branch target. For direct branches, the CPU indexes the BTB using a subset of the virtual address bits of the branch instruction to yield the predicted jump target. For indirect branches, CPUs use different mechanisms, which may take into account global branching history accumulated in the BHB when indexing the BTB. We refer to both types as Spectre-BTB.<p>Contrary to Spectre-PHT, where transient instructions execute along a restricted mispredicted path, Spectre-BTB allows redirecting transient control flow to an arbitrary destination. Adopting established techniques from return-oriented programming (ROP) attacks, but abusing BTB poisoning instead of application-level vulnerabilities, selected code “gadgets” found in the victim address space may be chained together to construct arbitrary transient instruction sequences. Hence, where the success of SpectrePHT critically relies on unintended leakage along the mispredicted code path, ROP-style gadget abuse in Spectre-BTB allows to more directly construct covert channels that expose secrets from the transient domain.<p>Source: <a href='https://spectreattack.com/spectre.pdf'>Kocher et al.</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Spectre-BTB" id="a110">
-                  <path d="m314.92 108.36h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.327c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.327c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path100" />
-                  <g transform="translate(204.26 96.29)" id="g108">
-                     <g transform="translate(-240.4 -349.47)" id="g106">
-                        <text transform="matrix(1 0 0 -1 240.4 349.47)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text104">
-                           <tspan x="0" y="0" id="tspan102">Spectre-BTB</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Maisuradze and Rossow and Koruyeh et al. introduced a Spectre variant that exploits the Return Stack Buffer (RSB). The RSB is a small per-core microarchitectural buffer that stores the virtual addresses following the N most recent call instructions. When encountering a ret instruction, the CPU pops the topmost element from the RSB to predict the return flow.<p>Misspeculation arises whenever the RSB layout diverges from the actual return addresses on the software stack. Such disparity for instance naturally occurs when restoring kernel/enclave/user stack pointers upon protection domain switches.<p>Furthermore, same-address-space adversaries may explicitly overwrite return addresses on the software stack, or transiently execute call instructions which update the RSB without committing architectural effects. This may allow untrusted code executing in a sandbox to transiently divert return control flow to interesting code gadgets outside of the sandboxed environment.<p>Due to the fixed-size nature of the RSB, a special case of misspeculation occurs for deeply nested function calls. Since the RSB can only store return addresses for the N most recent calls, an underfill occurs when the software stack is unrolled. In this case, the RSB can no longer provide accurate predictions. Starting from Skylake, Intel CPUs use the BTB as a fallback, thus allowing Spectre-BTB-style attacks triggered by ret instructions.<p>Source: <a href='https://arxiv.org/pdf/1807.10364.pdf'>Maisuradze and Rossow</a>, <a href='https://www.usenix.org/system/files/conference/woot18/woot18-paper-koruyeh.pdf'>Koruyeh et al.</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Spectre-RSB" id="a122">
-                  <path d="m314.92 80.016h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.327c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.327c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path112" />
-                  <g transform="translate(203.85 67.944)" id="g120">
-                     <g transform="translate(-241.22 -321.13)" id="g118">
-                        <text transform="matrix(1 0 0 -1 241.22 321.13)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text116">
-                           <tspan x="0" y="0" id="tspan114">Spectre-RSB</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Speculation in modern CPUs is not restricted to control flow but also includes predicting dependencies in the data flow.
-                  A common type of Store To Load (STL) dependencies require that a memory load shall not be executed before all preceding stores that write to the same location
-                  have completed.
-                  However, even before the addresses of all prior stores in the pipeline are known, the CPUs' memory disambiguator may predict which loads can already be executed speculatively.
-                  <p>
-                  When the disambiguator predicts that a load does not have a dependency on a prior store, the load reads data from the L1 data cache.
-                  When the addresses of all prior stores are known, the prediction is verified.
-                  If any overlap is found, the load and all following instructions are re-executed.
-                  <p>
-                  Jann Horn (Google Project Zero) showed how mispredictions by the memory disambiguator could be abused to speculatively bypass store instructions.
-                  Like previous attacks, Spectre-STL adversaries rely on an appropriate transient instruction sequence to leak unsanitized stale values via a microarchitectural covert channel.
-                  Furthermore, operating on stale pointer values may speculatively break type and memory safety guarantees in the transient execution domain.
-                  <p>
-                  Source: <a href='https://bugs.chromium.org/p/project-zero/issues/detail?id=1528'>Report by Jann Horn</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.</a>
-                  " data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Spectre-STL" id="a136">
-                  <g transform="translate(-1.2424e-6)" id="g126">
-                     <path d="m314.92 51.686h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.36c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.36c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffb3b3" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path124" />
-                  </g>
-                  <g transform="translate(204.73 39.581)" id="g134">
-                     <g transform="translate(-237.05 -292.76)" id="g132">
-                        <text transform="matrix(1 0 0 -1 237.05 292.76)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text130">
-                           <tspan x="0" y="0" id="tspan128">Spectre-STL</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <g transform="translate(13.861 -5.5446)" id="g148">
-                  <g transform="translate(266.46 158.59)" id="g146">
-                     <g transform="translate(-299.4 -411.77)" id="g144">
-                        <text transform="matrix(1 0 0 -1 299.4 419.27)" fill="#404040" font-family="CMTI12" font-size="11.955px" id="text142">
-                           <tspan x="0 9.5641603 13.15072 17.9328 21.818239 26.152 32.129601 35.71616 42.291519 45.878078 52.453442" y="0" id="tspan138">mistraining</tspan>
-                           <tspan x="0 4.7820802 8.6675196 13.00128 18.97888 22.864321 27.6464 33.026241" y="14.446" id="tspan140">strategy</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </g>
-               <a data-container="body" data-html="true" data-content="In a cross-address-space scenario, an attacker has two options. In the first, an attacker can mirror the virtual address space layout of the victim on a hyperthread (same phyiscal core) and mistrain at the exact same virtual address as the victim branch. We refer to this as cross-address-space in-place (CA-IP). In the second, the attacker mistrains the PHT on a congruent virtual address in a differnet address space. We refer to this as cross-address-space out-of-place (CA-OP). Cross-address-space attacks are possible as the PHT is shared between hyperthreads on the same logical core.<p>Source: <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br>Code: <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/PHT/ca_ip'>IP<a>, <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/PHT/ca_oop'>OOP<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Cross-Address-Space" id="a162">
-                  <path d="m506.26 165.12h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.46c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.46c0 2.201-1.7842 3.9851-3.9851 3.9851z" stroke-miterlimit="10" id="path150" stroke-width=".3985" stroke="#000" fill="#ccf" />
-                  <g transform="translate(381.72 152.92)" id="g160">
-                     <g transform="translate(-10.964)" id="g158">
-                        <g transform="translate(-414.67 -406.1)" id="g156">
-                           <text transform="matrix(1,0,0,-1,414.67,406.1)" font-size="11.955px" id="text154" style="font-size:11.95499992px;font-family:CMR12;fill:#000000">
-                              <tspan x="0" y="0" id="tspan152">Cross-address space</tspan>
-                           </text>
-                        </g>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="In a same-address-space scenario, an attacker has two options. The first option is to mistrain the exact location that is later on attacked.We refer to this as same-address-space in-place (SA-IP), In the second scenario, a congruent address is used for the mistraining. This is possible as only a subset of the virtual address is used for indexing the PHT. We refer to this as same-address-space out-of-place (SA-OP).<p>Source: <p>Source: <a href='https://spectreattack.com/spectre.pdf'>Kocher et al.</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br>Code: <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/PHT/sa_ip'>IP<a>, <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/PHT/sa_oop'>OOP<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Same-Address-Space" id="a174">
-                  <path d="m506.26 136.78h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.46c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.46c0 2.201-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path164" />
-                  <g transform="translate(369.88 124.57)" id="g172">
-                     <g transform="translate(-415.06 -377.75)" id="g170">
-                        <text transform="matrix(1,0,0,-1,415.06,377.75)" font-size="11.955px" id="text168" style="font-size:11.95499992px;font-family:CMR12;fill:#000000">
-                           <tspan x="0" y="0" id="tspan166">Same-address-space</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <path d="m718.86 178.59h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.201-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path176" />
-               <g transform="translate(608.84 165.98)" id="g186">
-                  <g transform="translate(5.6806)" id="g184">
-                     <g transform="translate(-641.78 -419.16)" id="g182">
-                        <text transform="matrix(1 0 0 -1 641.78 419.16)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text180">
-                           <tspan x="0" y="0" id="tspan178">PHT-CA-IP</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </g>
-               <path d="m718.86 150.24h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path190" />
-               <g transform="translate(612.37 137.63)" id="g198">
-                  <g transform="translate(-639.24 -390.81)" id="g196">
-                     <text transform="matrix(1 0 0 -1 639.24 390.81)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text194">
-                        <tspan x="0" y="0" id="tspan192">PHT-CA-OP</tspan>
-                     </text>
-                  </g>
-               </g>
-               <path d="m718.86 121.89h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path202" />
-               <g transform="translate(615.74 109.28)" id="g210">
-                  <g transform="translate(-642.9 -362.47)" id="g208">
-                     <text transform="matrix(1 0 0 -1 642.9 362.47)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text206">
-                        <tspan x="0" y="0" id="tspan204">PHT-SA-IP</tspan>
-                     </text>
-                  </g>
-               </g>
-               <path d="m718.86 93.545h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path214" />
-               <g transform="translate(612.64 80.938)" id="g222">
-                  <g transform="translate(-640.36 -334.12)" id="g220">
-                     <text transform="matrix(1 0 0 -1 640.36 334.12)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text218">
-                        <tspan x="0" y="0" id="tspan216">PHT-SA-OP</tspan>
-                     </text>
-                  </g>
-               </g>
-               <g transform="translate(398.39 181.26)" id="g232">
-                  <g transform="translate(-431.34 -434.44)" id="g230">
-                     <text transform="matrix(1 0 0 -1 431.34 434.44)" fill="#404040" font-family="CMTI12" font-size="11.955px" id="text228">
-                        <tspan x="0 3.58656 10.16192 14.34624 20.323839 23.312639 29.290239 34.072319 43.636478 48.41856 52.924477 60.855553 69.821953 75.201797 79.983871 83.570435 91.341316 97.318916 103.5954 107.48083 111.66515 117.64275 121.22932 125.41364 131.39124 134.38004 140.35764 145.13971 154.70387 159.48596 168.45236 176.38344" y="0" id="tspan226">in-place(IP)vs.,out-of-place(OP)</tspan>
-                     </text>
-                  </g>
-               </g>
-               <a data-container="body" data-html="true" data-content="In a cross-address-space scenario, an attacker has two options. In the first, an attacker can mirror the virtual address space layout of the victim on a hyperthread (same phyiscal core) and mistrain at the exact same virtual address as the victim branch. We refer to this as cross-address-space in-place (CA-IP). In the second, the attacker mistrains the BTB on a congruent virtual address in a differnet address space. We refer to this as cross-address-space out-of-place (CA-OP). Cross-address-space attacks are possible as the BTB is shared between hyperthreads on the same logical core.<p>Source: <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br>Code: <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/BTB/ca_ip'>IP<a>, <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/BTB/ca_oop'>OOP<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Cross-Address-Space" id="a244">
-                  <path d="m506.26 87.169h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.46c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.46c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path234" />
-                  <g transform="translate(370.5 74.964)" id="g242">
-                     <g transform="translate(-414.67 -328.15)" id="g240">
-                        <text transform="matrix(1,0,0,-1,414.67,328.15)" font-size="11.955px" id="text238" style="font-size:11.95499992px;font-family:CMR12;fill:#000000">
-                           <tspan x="0" y="0" id="tspan236">Cross-address-space</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="In a same-address-space scenario, an attacker has two options. The first option is to mistrain the exact location that is later on attacked.We refer to this as same-address-space in-place (SA-IP), In the second scenario, a congruent address is used for the mistraining. This is possible as only a subset of the virtual address is used for indexing the BTB. We refer to this as same-address-space out-of-place (SA-OP).<p>Source: <p>Source: <a href='https://spectreattack.com/spectre.pdf'>Kocher et al.</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br>Code: <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/BTB/sa_ip'>IP<a>, <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/BTB/sa_oop'>OOP<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Same-Address-Space" id="a256">
-                  <path d="m506.26 58.822h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.46c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.46c0 2.201-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path246" />
-                  <g transform="translate(369.88 46.618)" id="g254">
-                     <g transform="translate(-415.06 -299.8)" id="g252">
-                        <text transform="matrix(1,0,0,-1,415.06,299.8)" font-size="11.955px" id="text250" style="font-size:11.95499992px;font-family:CMR12;fill:#000000">
-                           <tspan x="0" y="0" id="tspan248">Same-address-space</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <path d="m718.86 65.198h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path258" />
-               <g transform="translate(609.13 52.592)" id="g268">
-                  <g transform="translate(5.7058)" id="g266">
-                     <g transform="translate(-642.07 -305.77)" id="g264">
-                        <text transform="matrix(1 0 0 -1 642.07 305.77)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text262">
-                           <tspan x="0" y="0" id="tspan260">BTB-CA-IP</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </g>
-               <path d="m718.86 36.851h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path272" />
-               <g transform="translate(606.58 24.245)" id="g282">
-                  <g transform="translate(5.1463)" id="g280">
-                     <g transform="translate(-639.53 -277.43)" id="g278">
-                        <text transform="matrix(1 0 0 -1 639.53 277.43)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text276">
-                           <tspan x="0" y="0" id="tspan274">BTB-CA-OP</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </g>
-               <path d="m718.86 8.5042h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path286" />
-               <g transform="translate(615.1 -4.101)" id="g294">
-                  <g transform="translate(-643.2 -249.08)" id="g292">
-                     <text transform="matrix(1 0 0 -1 643.2 249.08)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text290">
-                        <tspan x="0" y="0" id="tspan288">BTB-SA-IP</tspan>
-                     </text>
-                  </g>
-               </g>
-               <path d="m718.86-19.843h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path298" />
-               <g transform="translate(612 -32.448)" id="g306">
-                  <g transform="translate(-640.65 -220.73)" id="g304">
-                     <text transform="matrix(1 0 0 -1 640.65 220.73)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text302">
-                        <tspan x="0" y="0" id="tspan300">BTB-SA-OP</tspan>
-                     </text>
-                  </g>
-               </g>
-               <a data-container="body" data-html="true" data-content="In a cross-address-space RSB attack, an attacker can not simply run on a hyperthread to influence the RSB. The reason for that is that the RSB is not shared between hyperthreads. Therefore, an attacker has to interleave the execution of the attacker program with the victim to poison the RSB. This is possible in both an in-place and out-of-place scenario.<p>Source: <a href='https://arxiv.org/pdf/1807.10364.pdf'>Maisuradze and Rossow</a>, <a href='https://www.usenix.org/system/files/conference/woot18/woot18-paper-koruyeh.pdf'>Koruyeh et al.</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br>Code: <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/RSB/ca_ip'>IP<a>, <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/RSB/ca_oop'>OOP<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Cross-Address-Space" id="a322">
-                  <path d="m506.26 20.554h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.46c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.46c0 2.201-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path310" />
-                  <g transform="translate(381.72,8.35)" id="g320">
-                     <g transform="translate(-11.221)" id="g318">
-                        <g transform="translate(-414.67 -261.53)" id="g316">
-                           <text transform="matrix(1,0,0,-1,414.67,261.53)" font-size="11.955px" id="text314" style="font-size:11.95499992px;font-family:CMR12;fill:#000000">
-                              <tspan x="0" y="0" id="tspan312">Cross-address-space</tspan>
-                           </text>
-                        </g>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="In a same-address-space RSB attack, an attacker can explicitly overwrite the retun address on the software stack or transiently execute call instructions. Another cause for misspeculation are deeply nested function calls. This is due to the limited size of the RSB. One natural occurence of RSB misspeculation is when restoring the kernel/enclave/user stack pointer upon switching a protection domain. In all those cases, the execution might be diverted to a special code gadget that leaks data.<p>Source: <a href='https://arxiv.org/pdf/1807.10364.pdf'>Maisuradze and Rossow</a>, <a href='https://www.usenix.org/system/files/conference/woot18/woot18-paper-koruyeh.pdf'>Koruyeh et al.</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br>Code: <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/RSB/sa_ip'>IP<a>, <a href='https://github.com/IAIK/transientfail/tree/master/pocs/spectre/RSB/sa_oop'>OOP<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Same-Address-Space" id="a334">
-                  <path d="m506.26-7.7932h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-10.46c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v10.46c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path324" />
-                  <g transform="translate(369.88 -19.997)" id="g332">
-                     <g transform="translate(-415.06 -233.18)" id="g330">
-                        <text transform="matrix(1,0,0,-1,415.06,233.18)" font-size="11.955px" id="text328" style="font-size:11.95499992px;font-family:CMR12;fill:#000000">
-                           <tspan x="0" y="0" id="tspan326">Same-address-space</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <path d="m718.86-48.189h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.201-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path336" />
-               <g transform="translate(614.63 -60.794)" id="g344">
-                  <g transform="translate(-642.78 -192.39)" id="g342">
-                     <text transform="matrix(1 0 0 -1 642.78 192.39)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text340">
-                        <tspan x="0" y="0" id="tspan338">RSB-CA-IP</tspan>
-                     </text>
-                  </g>
-               </g>
-               <path d="m718.86-76.536h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path348" />
-               <g transform="translate(611.53 -89.141)" id="g356">
-                  <g transform="translate(-640.23 -164.04)" id="g354">
-                     <text transform="matrix(1 0 0 -1 640.23 164.04)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text352">
-                        <tspan x="0" y="0" id="tspan350">RSB-CA-OP</tspan>
-                     </text>
-                  </g>
-               </g>
-               <path d="m718.86-104.88h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path360" />
-               <g transform="translate(614.9 -117.49)" id="g368">
-                  <g transform="translate(-643.9 -135.7)" id="g366">
-                     <text transform="matrix(1 0 0 -1 643.9 135.7)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text364">
-                        <tspan x="0" y="0" id="tspan362">RSB-SA-IP</tspan>
-                     </text>
-                  </g>
-               </g>
-               <path d="m718.86-133.23h-147.94c-2.201 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.201 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path372" />
-               <g transform="translate(611.8 -145.83)" id="g380">
-                  <g transform="translate(-641.36 -107.35)" id="g378">
-                     <text transform="matrix(1 0 0 -1 641.36 107.35)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text376">
-                        <tspan x="0" y="0" id="tspan374">RSB-SA-OP</tspan>
-                     </text>
-                  </g>
-               </g>
-               <a data-container="body" data-html="true" data-content="During a context switch, the OS ha s to save all the registers, including the floating point unit (FPU) and SIMD registers. These latter registers are large and saving them would slow down context switches. Therefore, CPUs allow for a lazy state switch, meaning that instead of saving the registers, the FPU is simply marked as “not available”. The first FPU instruction issued after the FPU was marked as “not available” causes a  device-not-available (#NM) exception, allowing the OS to save the FPU state of previous execution context before marking the FPU as available again.
-                  <p>
-                  Stecklina and Prescher propose an attack on the above lazy state switch mechanism. The attack consists of three steps. In the first step, a victim performs operations loading data into the FPU registers. Then, in the second step, the CPUswitches to the attacker and marks the FPU as “not available”. The attacker now issues an instruction that uses the FPU, which generates an #NM fault. Before the faulting instruction retires, however, the CPU has already transiently executed the following instructions using data from the previous context. As such, analogous to previous Meltdown-type attacks, a malicious transient instruction sequence following the faulting instruction can encode the unauthorized FPU register contents through a microarchitectural covert channel.<p>Source: <a href='https://arxiv.org/pdf/1806.07480.pdf'>Stecklina and Prescher</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/NM'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-NM" id="a394">
-                  <path d="m314.92-19.843h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffb3b3" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path384" />
-                  <g transform="translate(200.18 -32.498)" id="g392">
-                     <g transform="translate(-230.58 -220.68)" id="g390">
-                        <text transform="matrix(1 0 0 -1 230.58 220.68)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text388">
-                           <tspan x="0" y="0" id="tspan386">Meltdown-NM</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Upon detecting an unaligned memory operand, the CPU may generate an alignment check exception (#AC). In our tests, the results of unaligned memory accesses never reach the transient execution. We suspect that this is because #AC is generated early-on, even before the operand’s virtual address is translated to a physical one. Hence, our experiments with Meltdown-AC were unsuccessful in showing any leakage.<p>Source: <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.</a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/AC'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-AC" id="a406">
-                  <path d="m314.92-48.19h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#4dffb8" stroke="#000" stroke-dasharray="2.98883, 1.99255" stroke-miterlimit="10" stroke-width=".3985" id="path396" />
-                  <g transform="translate(201.52 -60.844)" id="g404">
-                     <g transform="translate(-238.13 -192.34)" id="g402">
-                        <text transform="matrix(1 0 0 -1 238.13 192.34)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text400">
-                           <tspan x="0" y="0" id="tspan398">Meltdown-AC</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="On the ARMs we tested, there is no exception following the signed divison instruction, but the division yields merely zero. On x86, the division raises a divide-by-zero exception (#DE). Both on the AMD and Intel we tested, the CPU continues with the transient execution after the exception. In both cases, the result register is set to ‘0’, which is the same result as on the tested ARM. Thus, according to our experiments Meltdown-DE is not possible,as no real values are leaked.<p>Source: <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/DE'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-DE" id="a418">
-                  <path d="m314.92-76.536h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#4dffb8" stroke="#000" stroke-dasharray="2.98883, 1.99255" stroke-miterlimit="10" stroke-width=".3985" id="path408" />
-                  <g transform="translate(201.23 -89.19)" id="g416">
-                     <g transform="translate(-238.13 -163.99)" id="g414">
-                        <text transform="matrix(1 0 0 -1 238.13 163.99)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text412">
-                           <tspan x="0" y="0" id="tspan410">Meltdown-DE</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <path d="m314.92-104.88h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.201-1.7842 3.9851-3.9851 3.9851z" fill="#e6e6ff" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path420" />
-               <g transform="translate(205.83 -117.54)" id="g430">
-                  <g transform="translate(-3.3055)" id="g428">
-                     <g transform="translate(-238.78 -135.64)" id="g426">
-                        <text transform="matrix(1 0 0 -1 238.78 135.64)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text424">
-                           <tspan x="0" y="0" id="tspan422">Meltdown-PF</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </g>
-               <a data-container="body" data-html="true" data-content=" On our test systems, we did not succeed in transiently executing instructions following an invalid opcode. We suspect that exceptions during instruction fetch or decode are immediately handled by the CPU, without first buffering the offending instruction in the ROB. Moreover, as invalid opcodes have an undefined length, the CPU does not even know where the next instruction starts. Hence, we suspect that invalid opcodes only leak if the microarchitectural effect is already an effect caused by the invalid opcode itself, not by subsequent transient instructions.<p>Source: <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/UD'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-UD" id="a444">
-                  <path d="m314.92-133.23h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#4dffb8" stroke="#000" stroke-dasharray="2.98883, 1.99255" stroke-miterlimit="10" stroke-width=".3985" id="path434" />
-                  <g transform="translate(200.6 -145.88)" id="g442">
-                     <g transform="translate(-237.72 -107.3)" id="g440">
-                        <text transform="matrix(1 0 0 -1 237.72 107.3)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text438">
-                           <tspan x="0" y="0" id="tspan436">Meltdown-UD</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="We consistently found that out-oflimit segment accesses never reach transient execution in our experiments. We suspect that, due to the simplistic IA32 segmentation design, segment limits are validated early-on, and immediately raise a #GP or #SS (stack-segment fault) exception, without sending the offending instruction to the ROB. Therefore, we observed no leakage in our experiments with Meltdown-SS.<p>Source: <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/SS'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-SS" id="a456">
-                  <path d="m314.92-161.58h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#4dffb8" stroke="#000" stroke-dasharray="2.98883, 1.99255" stroke-miterlimit="10" stroke-width=".3985" id="path446" />
-                  <g transform="translate(201.97 -174.23)" id="g454">
-                     <g transform="translate(-240.08 -78.952)" id="g452">
-                        <text transform="matrix(1 0 0 -1 240.08 78.952)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text450">
-                           <tspan x="0" y="0" id="tspan448">Meltdown-SS</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="A Meltdown-BR attack exploits transient execution following a #BR exception to encode out-of-bounds secrets that are never architecturally visible. As such, Meltdown-BR is an exception-driven alternative for Spectre-PHT. Using such an attack, an attcker can leak data safeguarded by either an IA32 bound instruction (Intel, AMD), or state-of-the-art MPX protection (Intel-only). This is the first experiment demonstrating a Meltdown-type transient execution attack exploiting delayed exception handling on AMD CPUs.<p>Source: <a href='https://software.intel.com/security-software-guidance/api-app/sites/default/files/336996-Speculative-Execution-Side-Channel-Mitigations.pdf'>Intel</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.</a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/BR'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-BR" id="a468">
-                  <path d="m314.92-189.92h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ccf" stroke="#000" stroke-miterlimit="10" stroke-width=".3985" id="path458" />
-                  <g transform="translate(201.36 -202.58)" id="g466">
-                     <g transform="translate(-238.13 -50.606)" id="g464">
-                        <text transform="matrix(1 0 0 -1 238.13 50.606)" fill="#000000" font-family="CMR12" font-size="11.955px" id="text462">
-                           <tspan x="0" y="0" id="tspan460">Meltdown-BR</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Meltdown-GP (named initially Variant 3a) [37] allows an attacker to read privileged system registers. It was first discovered and published by ARM and subsequently Intel determined that their CPUs are also susceptible to the attack. Unauthorized access to privileged system registers (e.g., via rdmsr) raises a general protection fault (#GP). Similar to previous Meltdown-type attacks, however, the attack exploits that the transient execution following the faulting instruction can still compute on the unauthorized data, and leak the system register contents through a microarchitectural covert channel.<p>Source: <a href='https://developer.arm.com/support/arm-security-updates/speculative-processor-vulnerability/download-the-whitepaper'>ARM</a>, <a href='https://software.intel.com/security-software-guidance/api-app/sites/default/files/336983-Intel-Analysis-of-Speculative-Execution-Side-Channels-White-Paper.pdf'>Intel</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.</a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/GP'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-GP" id="a480">
-                  <path d="m314.92-218.27h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.201-1.7842 3.9851-3.9851 3.9851z" fill="#ffb3b3" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path470" />
-                  <g transform="translate(200.97 -230.92)" id="g478">
-                     <g transform="translate(-232.34 -22.259)" id="g476">
-                        <text transform="matrix(1 0 0 -1 232.34 22.259)" fill="#000000" font-family="CMBX12" font-size="11.955px" id="text474">
-                           <tspan x="0" y="0" id="tspan472">Meltdown-GP</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Modern CPUs commonly feature a “user/supervisor” pagetable attribute to denote a virtual memory page as belonging to the OS kernel. The original Meltdown attack reads kernel memory from user space on CPUs that do not transiently enforce the user/supervisor flag. In the trigger phase an unauthorized kernel address is dereferenced, which eventually causes a page fault. Before the fault becomes architecturally visible, however, the attacker executes a transient instruction sequence that for instance accesses a cache line based on the privileged data read by the trigger instruction. In the final phase, after the exception has been raised, the privileged data is reconstructed at the receiving end of the covert channel (e.g., Flush+Reload).<p>Source: <a href='https://meltdownattack.com/meltdown.pdf'>Lipp et al.</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.</a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/US'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-US" id="a492">
-                  <path d="m506.26-36.851h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffb3b3" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path482" />
-                  <g transform="translate(392.73 -49.506)" id="g490">
-                     <g transform="translate(-424.65 -203.68)" id="g488">
-                        <text transform="matrix(1,0,0,-1,424.65,203.68)" font-size="11.955px" id="text486" style="font-size:11.95499992px;font-family:CMBX12;fill:#000000">
-                           <tspan x="0" y="0" id="tspan484">Meltdown-US</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Meltdown-P is an attack targeting Intel SGX technology. An attacker clears the “present” bit in the page-table entry mapping the
-                  enclave secret, ensuring that a page fault (L1 terminal fault) will be raised for subsequent accesses. A terminal fault occurs when accessing a page-table entry with either the present bit cleared or a “reserved” bit set. In such cases, the CPU immediately aborts address translation. However, since the L1 data cache is indexed in parallel to address translation, the page table entry’s physical address field (i.e., frame number) may still be passed to the L1 cache. Any data present in L1 and tagged with that physical address will now be forwarded to the transient execution, regardless of access permissions.<p>A generalized form of the attack allows an attacker to bypass operating system or hypervisor isolation.<p>Another variation allows an untrusted virtual machine, controlling guest-physical addresses, to extract the host machine’s entire L1 data cache (including data belonging to the hypervisor or other virtual machines). The underlying problem is that a terminal fault in the guest page-tables early-outs the address translation process, such that guest-physical addresses are erroneously passed to the L1 data cache, without first being translated into a proper host physical address.<p>Source: <a href='https://foreshadowattack.eu/foreshadow.pdf'>Van Bulck et al.</a>, <a href='https://foreshadowattack.eu/foreshadow-NG.pdf'>Weisse et al</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.</a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/P'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-P" id="a504">
-                  <path d="m506.26-65.198h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffb3b3" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path494" />
-                  <g transform="translate(397.16 -77.852)" id="g502">
-                     <g transform="translate(-428.96,-175.33)" id="g500">
-                        <text transform="matrix(1,0,0,-1,428.96,175.33)" font-size="11.955px" id="text498" style="font-size:11.95499992px;font-family:CMBX12;fill:#000000">
-                           <tspan x="0" y="0" id="tspan496">Meltdown-P</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Kiriansky and Waldspurger presented the first Meltdown-type attack that bypasses page-table based access rights within the current privilege level. Specifically, they showed that transient execution does not respect the “read/write” page-table attribute. The ability to transiently overwrite read-only data within the current privilege level can bypass software-based sandboxes which rely on hardware enforcement of read-only memory.<p>Source: <a href='https://arxiv.org/pdf/1807.03757.pdf'>Kiriansky and Waldspurger</a>, <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.</a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/RW'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-RW" id="a516">
-                  <path d="m506.26-93.545h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffb3b3" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path506" />
-                  <g transform="translate(390.94 -106.2)" id="g514">
-                     <g transform="translate(-422.34 -146.98)" id="g512">
-                        <text transform="matrix(1,0,0,-1,422.34,146.98)" font-size="11.955px" id="text510" style="font-size:11.95499992px;font-family:CMBX12;fill:#000000">
-                           <tspan x="0" y="0" id="tspan508">Meltdown-RW</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Intel Skylake-SP server CPUs support memory-protection keys for user space (PKU). This feature allows processes to change the access permissions of a page directly from user space, i.e., without requiring a syscall/hypercall. Thus, with PKU, user-space applications can implement efficient hardware-enforced isolation of trusted parts. A Meltdown-PK attack allows to bypass both read and write isolation provided by PKU. Meltdown-PK works if an attacker has code execution in the containing process, even if the attacker cannot execute the wrpkru instruction (e.g., blacklisting).<p>Source: <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a><br><a href='https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/PK'>Code<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-PK" id="a528">
-                  <path d="m506.26-121.89h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.201-1.7842 3.9851-3.9851 3.9851z" fill="#ffb3b3" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path518" />
-                  <g transform="translate(392.91 -134.54)" id="g526">
-                     <g transform="translate(-423.7 -118.64)" id="g524">
-                        <text transform="matrix(1,0,0,-1,423.7,118.64)" font-size="11.955px" id="text522" style="font-size:11.95499992px;font-family:CMBX12;fill:#000000">
-                           <tspan x="0" y="0" id="tspan520">Meltdown-PK</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content=" On our test systems, we did not succeed in transiently executing instructions residing in non-executable memory.<p>Source: <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-XD" id="a540">
-                  <path d="m506.26-150.24h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#4dffb8" stroke="#000" stroke-dasharray="2.98883, 1.99255" stroke-miterlimit="10" stroke-width=".3985" id="path530" />
-                  <g transform="translate(392.51 -162.89)" id="g538">
-                     <g transform="translate(-429.06 -90.291)" id="g536">
-                        <text transform="matrix(1,0,0,-1,429.06,90.291)" font-size="11.955px" id="text534" style="font-size:11.95499992px;font-family:CMR12;fill:#000000">
-                           <tspan x="0" y="0" id="tspan532">Meltdown-XD</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </a>
-               <a data-container="body" data-html="true" data-content="Although supervisor mode access prevention (SMAP) raises a page fault (#PF) when accessing user-space memory from the kernel, it seems to be free of any Meltdown effect in our experiments. Thus, we were not able to leak any data using Meltdown-SM in our experiments.<p>Source: <a href='https://arxiv.org/pdf/1811.05441.pdf'>Canella et al.<a>" data-placement="right" data-toggle="popover" data-trigger="focus" href="#" onclick="return false;" tabindex="6" title="" data-original-title="Meltdown-SM" id="a554">
-                  <path d="m506.26-178.58h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#4dffb8" stroke="#000" stroke-dasharray="2.98883, 1.99255" stroke-miterlimit="10" stroke-width=".3985" id="path542" />
-                  <g transform="translate(396.36 -191.24)" id="g552">
-                     <g transform="translate(-4.16)" id="g550">
-                        <g transform="translate(-429.3 -61.944)" id="g548">
-                           <text transform="matrix(1,0,0,-1,429.3,61.944)" font-size="11.955px" id="text546" style="font-size:11.95499992px;font-family:CMR12;fill:#000000">
-                              <tspan x="0" y="0" id="tspan544">Meltdown-SM</tspan>
-                           </text>
-                        </g>
-                     </g>
-                  </g>
-               </a>
-               <path d="m506.26-206.93h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.2009 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.2009-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path556" />
-               <g transform="translate(384.56 -219.58)" id="g564">
-                  <g transform="translate(-417.5 -33.598)" id="g562">
-                     <text transform="matrix(1,0,0,-1,417.5,33.598)" font-size="11.955px" id="text560" style="font-size:11.95499992px;font-family:CMBX12;fill:#000000">
-                        <tspan x="0" y="0" id="tspan558">Meltdown-MPX</tspan>
-                     </text>
-                  </g>
-               </g>
-               <path d="m506.26-235.28h-147.94c-2.2009 0-3.9851-1.7842-3.9851-3.9851v-9.038c0-2.201 1.7842-3.9851 3.9851-3.9851h147.94c2.2009 0 3.9851 1.7842 3.9851 3.9851v9.038c0 2.201-1.7842 3.9851-3.9851 3.9851z" fill="#ffe6e6" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path568" />
-               <g transform="translate(385.41 -247.93)" id="g576">
-                  <g transform="translate(-418.36 -5.251)" id="g574">
-                     <text transform="matrix(1,0,0,-1,418.36,5.251)" font-size="11.955px" id="text572" style="font-size:11.95499992px;font-family:CMBX12;fill:#000000">
-                        <tspan x="0" y="0" id="tspan570">Meltdown-BND</tspan>
-                     </text>
-                  </g>
-               </g>
-               <path d="m32.448 0c25.797 0 24.246 35.722 24.246 58.929" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path580" />
-               <g transform="rotate(90 -1.1176 57.811)" id="g584">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path582" />
-               </g>
-               <g transform="translate(-7.8412 1.4702)" id="g598">
-                  <g transform="translate(15.133,33.889)" id="g596">
-                     <g transform="scale(.0961)" id="g594">
-                        <g clip-path="url(#g)" id="g592">
-                           <g id="g590">
-                              <path d="m94.75 214.22h-83.562c-6.176 0-11.188-5.011-11.188-11.187v-83.551c0-6.187 5.012-11.199 11.188-11.199h83.562c6.176 0 11.188 5.012 11.188 11.199v83.551c0 6.176-5 11.187-11.188 11.187zm-68.988-35.961c-5.637 0-10.2 4.575-10.2 10.2 0 5.636 4.563 10.199 10.2 10.199 5.636 0 10.199-4.563 10.199-10.199 0-5.625-4.563-10.2-10.199-10.2zm27.215-27.203c-5.641 0-10.215 4.563-10.215 10.203 0 5.625 4.574 10.2 10.215 10.2 5.636 0 10.199-4.575 10.199-10.2 0-5.64-4.563-10.203-10.199-10.203zm27.211-27.211c-5.637 0-10.211 4.563-10.211 10.2 0 5.636 4.574 10.214 10.211 10.214 5.624 0 10.199-4.578 10.199-10.214 0-5.637-4.575-10.2-10.199-10.2z" id="path586" />
-                              <path d="m216.81 99.723-78.074 29.762c-5.777 2.199-12.238-0.699-14.437-6.473l-29.762-78.078c-2.203-5.773 0.699-12.222 6.473-14.437l78.074-29.762c5.777-2.199 12.226 0.699 14.437 6.477l29.766 78.074c2.199 5.773-0.703 12.238-6.477 14.437zm-96.886-59.789c-5.262 2-7.903 7.903-5.903 13.176 2.016 5.262 7.915 7.902 13.176 5.902 5.262-2 7.903-7.914 5.903-13.164-2.016-5.273-7.914-7.914-13.176-5.914zm3.785 38.59c2.016 5.285 7.914 7.91 13.176 5.91 5.261-2 7.902-7.898 5.902-13.172-2-5.265-7.902-7.902-13.176-5.902-5.261 2-7.902 7.902-5.902 13.164zm15.59 12.25c-5.262 2.012-7.903 7.91-5.903 13.176 2.016 5.262 7.914 7.91 13.164 5.898 5.274-2 7.926-7.898 5.915-13.164-2-5.273-7.903-7.91-13.176-5.91zm31.949-70.402c-5.262 2.015-7.898 7.914-5.898 13.176 2 5.261 7.91 7.914 13.16 5.914 5.277-2.012 7.914-7.926 5.902-13.176-2-5.274-7.902-7.926-13.164-5.914zm9.688 25.414c-5.274 2.023-7.915 7.914-5.899 13.176 2 5.273 7.899 7.925 13.16 5.91 5.278-2.012 7.914-7.899 5.914-13.172-2.011-5.266-7.914-7.914-13.175-5.914zm9.699 25.437c-5.274 2-7.91 7.899-5.899 13.164 2 5.274 7.899 7.911 13.16 5.899 5.266-2 7.903-7.899 5.903-13.164-2.012-5.274-7.914-7.91-13.164-5.899z" id="path588" />
-                           </g>
-                        </g>
-                     </g>
-                  </g>
-               </g>
-               <g transform="translate(-7.8412 1.4702)" id="g608">
-                  <g transform="translate(.866 22.041)" id="g606">
-                     <g transform="translate(-33.813 -275.22)" id="g604">
-                        <text transform="matrix(1 0 0 -1 33.813 275.22)" fill="#404040" font-family="CMTI12" font-size="11.955px" id="text602">
-                           <tspan x="0" y="0" id="tspan600">prediction</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </g>
-               <path d="m32.448 0c25.77 0 24.246-35.683 24.246-58.862" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path610" />
-               <g transform="rotate(-90 -1.0844 -57.778)" id="g614">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path612" />
-               </g>
-               <g transform="translate(-8.8214)" id="g624">
-                  <g transform="translate(14.53,-30.83)" id="g622">
-                     <g transform="translate(-47.477 -222.35)" id="g620">
-                        <text transform="matrix(1 0 0 -1 47.477 222.35)" fill="#404040" font-family="CMTI12" font-size="11.955px" id="text618">
-                           <tspan x="0" y="0" id="tspan616">fault</tspan>
-                        </text>
-                     </g>
-                  </g>
-               </g>
-               <g transform="translate(-8.8214)" id="g634">
-                  <g transform="translate(15.593,-55.873)" id="g632">
-                     <g transform="scale(.14297)" id="g630">
-                        <g clip-path="url(#h)" id="g628">
-                           <path d="m72 144c-39.699 0-72-32.301-72-72s32.301-72 72-72 72 32.301 72 72-32.301 72-72 72zm-48-72c0 26.469 21.531 48 48 48 8.887 0 17.188-2.469 24.332-6.695l-65.637-65.637c-4.226 7.144-6.695 15.445-6.695 24.332zm48-48c-8.887 0-17.188 2.469-24.332 6.695l65.637 65.637c4.226-7.144 6.695-15.445 6.695-24.332 0-26.469-21.531-48-48-48z" id="path626" />
-                        </g>
-                     </g>
-                  </g>
-               </g>
-               <path d="m120.67 70.867c27.582 0 14.539 56.694 39.531 56.694" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path636" />
-               <g transform="translate(160.2 127.56)" id="g640">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path638" />
-               </g>
-               <path d="m120.67 70.867c19.819 0 22.302 28.347 39.531 28.347" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path642" />
-               <g transform="translate(160.2 99.214)" id="g646">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path644" />
-               </g>
-               <path d="m120.67 70.867c16.426 0 25.696 2e-5 39.531 2e-5" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path648" />
-               <g transform="translate(160.2 70.867)" id="g652">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path650" />
-               </g>
-               <path d="m120.67 70.867c19.726 0 22.197-28.347 39.332-28.347" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path654" />
-               <g transform="translate(160.01 42.52)" id="g658">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path656" />
-               </g>
-               <path d="m319.1 127.56c17.556 0 17.479 28.347 32.445 28.347" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path660" />
-               <g transform="translate(351.55 155.91)" id="g664">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path662" />
-               </g>
-               <path d="m319.1 127.56h32.445" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path666" />
-               <g transform="translate(351.55 127.56)" id="g670">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path668" />
-               </g>
-               <path d="m510.44 155.91c22.579 0 33.517 14.173 53.506 14.173" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path672" />
-               <g transform="translate(563.95 170.08)" id="g676">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path674" />
-               </g>
-               <path d="m510.44 155.91c22.579 0 33.517-14.173 53.506-14.173" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path678" />
-               <g transform="translate(563.95 141.73)" id="g682">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path680" />
-               </g>
-               <path d="m510.44 127.56c22.579 0 33.517-14.173 53.506-14.173" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path684" />
-               <g transform="translate(563.95 113.39)" id="g688">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path686" />
-               </g>
-               <path d="m510.44 127.56c27.425 0 28.671-42.52 53.506-42.52" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path690" />
-               <g transform="translate(563.95 85.04)" id="g694">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path692" />
-               </g>
-               <path d="m319.1 99.214c15.96 0 19.075-21.26 32.445-21.26" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path696" />
-               <g transform="translate(351.55 77.954)" id="g700">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path698" />
-               </g>
-               <path d="m319.1 99.214c23.675 0 11.36-49.607 32.445-49.607" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path702" />
-               <g transform="translate(351.55 49.607)" id="g706">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path704" />
-               </g>
-               <path d="m510.44 77.954c23.328 0 32.768-21.26 53.506-21.26" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path708" />
-               <g transform="translate(563.95 56.694)" id="g712">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path710" />
-               </g>
-               <path d="m510.44 77.954c29.282 0 26.814-49.607 53.506-49.607" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path714" />
-               <g transform="translate(563.95 28.347)" id="g718">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path716" />
-               </g>
-               <path d="m510.44 49.607c29.282 0 26.814-49.607 53.506-49.607" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path720" />
-               <g transform="translate(563.95 3e-5)" id="g724">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path722" />
-               </g>
-               <path d="m510.44 49.607c37.381 0 18.714-77.954 53.506-77.954" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path726" />
-               <g transform="translate(563.95 -28.347)" id="g730">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path728" />
-               </g>
-               <path d="m319.1 70.867c16.125 0 18.91-59.528 32.445-59.528" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path732" />
-               <g transform="translate(351.55 11.339)" id="g736">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path734" />
-               </g>
-               <path d="m319.1 70.867c22.11 0 12.925-87.875 32.445-87.875" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path738" />
-               <g transform="translate(351.55 -17.008)" id="g742">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path740" />
-               </g>
-               <path d="m510.44 11.339c34.436 0 21.66-68.032 53.506-68.032" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path744" />
-               <g transform="translate(563.95 -56.694)" id="g748">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path746" />
-               </g>
-               <path d="m510.44 11.339c43.511 0 12.585-96.379 53.506-96.379" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path750" />
-               <g transform="translate(563.95 -85.04)" id="g754">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path752" />
-               </g>
-               <path d="m510.44-17.008c26.107 0 29.989-96.379 53.506-96.379" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path756" />
-               <g transform="translate(563.95 -113.39)" id="g760">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path758" />
-               </g>
-               <path d="m510.44-17.008c31.916 0 24.18-124.73 53.506-124.73" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path762" />
-               <g transform="translate(563.95 -141.73)" id="g766">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path764" />
-               </g>
-               <path d="m120.67-70.867c23.287 0 18.636 42.52 39.332 42.52" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path768" />
-               <g transform="translate(160.01 -28.347)" id="g772">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path770" />
-               </g>
-               <path d="m120.67-70.867c32.138 0 9.9838-70.867 39.531-70.867" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path774" />
-               <g transform="translate(160.2 -141.73)" id="g778">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path776" />
-               </g>
-               <path d="m120.67-70.867c17.301 0 24.82-14.173 39.531-14.173" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path780" />
-               <g transform="translate(160.2 -85.04)" id="g784">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path782" />
-               </g>
-               <path d="m120.67-70.867c23.415 0 18.707-42.52 39.531-42.52" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path786" />
-               <g transform="translate(160.2 -113.39)" id="g790">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path788" />
-               </g>
-               <path d="m120.67-70.867c17.301 0 24.82 14.173 39.531 14.173" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path792" />
-               <g transform="translate(160.2 -56.694)" id="g796">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path794" />
-               </g>
-               <path d="m120.67-70.867c31.438 0 10.684-127.56 39.531-127.56" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path798" />
-               <g transform="translate(160.2 -198.43)" id="g802">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path800" />
-               </g>
-               <path d="m120.67-70.867c37.804 0 4.1186-155.91 39.332-155.91" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path804" />
-               <g transform="translate(160.01 -226.77)" id="g808">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path806" />
-               </g>
-               <path d="m120.67-70.867c25.28 0 16.841-99.214 39.531-99.214" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path810" />
-               <g transform="translate(160.2 -170.08)" id="g814">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path812" />
-               </g>
-               <path d="m319.1-113.39c29.905 0 4.9307 68.032 32.246 68.032" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path816" />
-               <g transform="translate(351.35 -45.355)" id="g820">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path818" />
-               </g>
-               <path d="m319.1-113.39c20.608 0 14.228 39.685 32.246 39.685" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path822" />
-               <g transform="translate(351.35 -73.702)" id="g826">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path824" />
-               </g>
-               <path d="m319.1-113.39c14.309 0 20.527 11.339 32.246 11.339" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path828" />
-               <g transform="translate(351.35 -102.05)" id="g832">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path830" />
-               </g>
-               <path d="m319.1-113.39c15.114 0 19.722-17.008 32.246-17.008" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path834" />
-               <g transform="translate(351.35 -130.4)" id="g838">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path836" />
-               </g>
-               <path d="m319.1-113.39c22.392 0 12.643-45.355 32.445-45.355" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path840" />
-               <g transform="translate(351.55 -158.74)" id="g844">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path842" />
-               </g>
-               <path d="m319.1-113.39c31.839 0 3.1963-73.702 32.445-73.702" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path846" />
-               <g transform="translate(351.55 -187.09)" id="g850">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path848" />
-               </g>
-               <path d="m319.1-198.43c15.114 0 19.722-17.008 32.246-17.008" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path852" />
-               <g transform="translate(351.35 -215.44)" id="g856">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path854" />
-               </g>
-               <path d="m319.1-198.43c22.282 0 12.553-45.355 32.246-45.355" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".79701" id="path858" />
-               <g transform="translate(351.35 -243.78)" id="g862">
-                  <path d="M 2.59026,0 -1.55415,2.0722 0,0 -1.55415,-2.0722" id="path860" />
-               </g>
-            </g>
-         </svg>
-      </div>
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha256-Y1rRlwTzT5K5hhCBfAFWABD4cU13QGuRN6P5apfWzVs=" crossorigin="anonymous"></script>
-      <script src="js/tree.js" type="text/javascript"></script>
-<footer class="site-footer container-fluid"><p class="float-left"><a href="https://github.com/IAIK/transientfail" target="_blank">Proof-of-Concept Repository</a></p><p class="float-right"> &copy; 2019 Graz University of Technology. All Rights Reserved. &middot; <a href="https://www.tugraz.at/en/about-this-page/legal-notice" target="_blank">Legal Notice</a></p></footer>
-   </body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="">
+
+    <title>Transient Execution Attacks</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="dist/index.js"></script>
+    <script src="dist/FileSaver.min.js"></script>
+    <script src="bibliography.js"></script>
+    <script src="js/filter.js"></script>
+    <script src="js/export.js"></script>
+    <script src="tree.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-9">
+            <form onsubmit="filter(); return false;">
+            <div class="form-group">
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="toggleSpectre" checked>
+                    <label class="custom-control-label" for="toggleSpectre">Spectre</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="toggleMeltdown" checked>
+                    <label class="custom-control-label" for="toggleMeltdown">Meltdown</label>
+                </div>
+ 
+                <div class="button-group custom-control-inline">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Buffer</button>
+                    <ul class="dropdown-menu">
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleL1" checked>
+                                <label class="custom-control-label" for="toggleL1">L1 cache</label>
+                            </div>
+                        </a></li>
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleLFB" checked>
+                                <label class="custom-control-label" for="toggleLFB">Line fill buffer</label>
+                            </div>
+                        </a></li>
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleSB" checked>
+                                <label class="custom-control-label" for="toggleSB">Store buffer</label>
+                            </div>
+                        </a></li>
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleLP" checked>
+                                <label class="custom-control-label" for="toggleLP">Load ports</label>
+                            </div>
+                        </a></li>
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleREG" checked>
+                                <label class="custom-control-label" for="toggleREG">CPU registers</label>
+                            </div>
+                        </a></li>
+                       <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleMEM" checked>
+                                <label class="custom-control-label" for="toggleMEM">Memory</label>
+                            </div>
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div class="button-group custom-control-inline">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Vendor</button>
+                    <ul class="dropdown-menu">
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleIntel" checked>
+                                <label class="custom-control-label" for="toggleIntel">Intel</label>
+                            </div>
+                        </a></li>
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleARM" checked>
+                                <label class="custom-control-label" for="toggleARM">ARM</label>
+                            </div>
+                        </a></li>
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleAMD" checked>
+                                <label class="custom-control-label" for="toggleAMD">AMD</label>
+                            </div>
+                        </a></li>
+                        <!--
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleIBM" checked>
+                                <label class="custom-control-label" for="toggleIBM">IBM</label>
+                            </div>
+                        </a></li>
+                        -->
+                    </ul>
+                </div>
+                
+                <div class="button-group custom-control-inline">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">More filters</button>
+                    <ul class="dropdown-menu">
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleTodo">
+                                <label class="custom-control-label" for="toggleTodo">Unexplored</label>
+                            </div>
+                        </a></li>
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleFails">
+                                <label class="custom-control-label" for="toggleFails">Non-working</label>
+                            </div>
+                        </a></li>
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleWorking" checked>
+                                <label class="custom-control-label" for="toggleWorking">Working</label>
+                            </div>
+                        </a></li>
+                        <hr>
+                        <!--
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="togglePaper" checked>
+                                <label class="custom-control-label" for="togglePaper">Academic paper</label>
+                            </div>   
+                        </a></li>
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleNoPaper" checked>
+                                <label class="custom-control-label" for="toggleNoPaper">No academic paper</label>
+                            </div> 
+                        </a></li>
+                        <hr>
+                        -->
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="togglePoC" checked>
+                                <label class="custom-control-label" for="togglePoC">With PoC</label>
+                            </div>   
+                        </a></li>
+                        <li>&nbsp;<a>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="toggleNoPoC" checked>
+                                <label class="custom-control-label" for="toggleNoPoC">Without PoC</label>
+                            </div> 
+                        </a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="custom-control-inline">
+                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" id="search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </div>
+                </div>
+                
+                
+                <div class="button-group custom-control-inline pull-right">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Export</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="dropdown-item" onclick="exportSVG()">SVG</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="exportTikz()">TikZ</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="exportDOT()">DOT</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+            </form>
+            <div id="tree" style="height:90vh;width:100%;z-index:0"></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card">
+                    <div class="card-header">
+                        Details
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" id="dbox_title"></h5>
+                        <div id="dbox_img" align="center" style="display: none;"></div>
+                        <p class="card-text" id="dbox">Click on a node for more information.</p>
+                        <p class="card-text" id="dbox_todo" style="display: none;"></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="dbox_h_src" style="display: none;"><b>References</b><br><div id="dbox_src"></div></li>
+                        <li class="list-group-item" id="dbox_h_affected" style="display: none;"><b>Known to be affected</b><br><div id="dbox_affected"></div></li>
+                        <li class="list-group-item" id="dbox_h_aka" style="display: none;"><b>Also known as</b><br><div id="dbox_aka"></div></li>
+                        <li class="list-group-item" id="dbox_h_cve" style="display: none;"><b>CVE</b><br><div id="dbox_cve"></div></li>
+                        <li class="list-group-item" id="dbox_h_poc" style="display: none;"><b>PoC</b><br><div id="dbox_poc"></div></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function replaceStr(str, replaceWhat, replaceTo){
+        replaceWhat = replaceWhat.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        var re = new RegExp(replaceWhat, 'gi');
+        return str.replace(re, replaceTo);
+    }
+
+    function highlightSearch(input, term) {
+        if(term === undefined || term == "" || term.trim().length == 0) return input;
+        if(typeof(input) == "string") {
+            return replaceStr(input, term, '<span class="highlight">$&</span>');
+        }
+        if(typeof(input) == "object") {
+            if(Array.isArray(input)) {
+                var new_input = [];
+                for(let element of input) {
+                    new_input.push(highlightSearch(element, term));
+                }
+                return new_input;
+            } else {
+                var new_input = {};
+                for(let key of Object.keys(input)) {
+                    if(key == "url") new_input[key] = input[key];
+                    else new_input[key] = highlightSearch(input[key], term); 
+                }
+                return new_input;
+            }
+        }
+        return input;
+    }
+
+    function showList(list, target, content) {
+        if(list !== undefined && list.length > 0) {
+            $(target).show();
+            var clist = "<small><ul>";
+            for(var s in list) {
+                clist += "<li><b>";
+                if(list[s].url !== undefined) {
+                    clist += "<a href=\"" + list[s].url + "\" target='_blank'>";
+                }
+                clist += list[s].title||"";
+                if(list[s].url !== undefined) {
+                    clist += "</a>";
+                }
+                clist += "</b>";
+                if(list[s].author !== undefined) {
+                    clist += "<br>" + list[s].author;
+                }
+                if(list[s].conference !== undefined) {
+                    clist += " (<i>" + list[s].conference + "</i>)";
+                }
+                if(typeof(list[s]) === "string") {
+                    clist += list[s];
+                }
+                clist += "</li>";
+            }
+            clist += "</small></ul>";
+            $(content).html(clist);
+        } else {
+            $(target).hide();
+        }
+    }
+
+    function popup(node) {
+        var searchterm = $("#search").val();
+    
+        $("#dbox").html(highlightSearch(node.description, searchterm));
+        var title = highlightSearch(node.title, searchterm);
+        if (node.alias) title += " <i>(aka " + highlightSearch(node.alias, searchterm) + ")</i>";
+        $("#dbox_title").html(title);
+
+        if (node.img)
+        {
+            $("#dbox_img").html("<img style=\"max-height:150px; max-width:95%;\" src=\"images/" + node.img + "\"/><p></p>");
+            $("#dbox_img").show();
+        }
+        else
+        {
+            $("#dbox_img").hide();
+        }
+
+        if (node.todo)
+        {
+            $("#dbox_todo").html("<b>Future work</b><br>" + highlightSearch(node.todo, searchterm));
+            $("#dbox_todo").show();
+        }
+        else
+        {
+            $("#dbox_todo").hide();
+        }
+
+        showList(highlightSearch(node.sources, searchterm), "#dbox_h_src", "#dbox_src");
+        showList(highlightSearch(node.names, searchterm), "#dbox_h_aka", "#dbox_aka");
+        showList(highlightSearch(node.cve, searchterm), "#dbox_h_cve", "#dbox_cve");
+        showList(highlightSearch(node.poc, searchterm), "#dbox_h_poc", "#dbox_poc");
+        showList(highlightSearch(node.affects, searchterm), "#dbox_h_affected", "#dbox_affected");
+        
+    }
+    
+    function nodeTemplate(node) {
+        var html = "<div class='box node' style='height:" + node.settings.nodeHeight + "px; width:" + node.settings.nodeWidth + "px; background-color:" + node.data.color + ";' id='db" + node.data.id + "'>";
+        html += "<div><strong>" + node.data.title + "</strong></div>";
+        if(node.data.text_top !== undefined) {
+            html += "<div class='desc_top'>" + node.data.text_top + "</div>";
+        }
+        if(node.data.text_bottom !== undefined) {
+            html += "<div class='desc_bottom'>" + node.data.text_bottom + "</div>";
+        }
+        html += "</div>";
+        return html;
+    }
+
+    var tree = Treeviz.create({
+        htmlId: "tree",
+        idKey: "id",
+        hasFlatData: true,
+        relationnalField: "father",
+        hasPanAndZoom: true,
+        nodeWidth: 180,
+        nodeHeight: 25,
+        mainAxisNodeSpacing: 1.4,
+        secondaryAxisNodeSpacing: 1.05,
+        isHorizontal: true,
+        renderNode: nodeTemplate,
+        linkWidth: (nodeData) => 4,
+        linkShape: "curve",
+        linkColor: (nodeData) => "#B0BEC5" ,
+        onNodeClick: (nodeData) => popup(nodeData.data),
+    });
+    
+    tree.refresh(data);
+
+    $("#toggleMeltdown").click(filter);
+    $("#toggleSpectre").click(filter);
+
+    buildIndex();
+    filter();
+    
+
+    var options = [];
+    $( '.dropdown-menu a' ).on( 'click', function( event ) {
+        var $target = $( event.currentTarget ),
+            val = $target.attr( 'data-value' ),
+            $inp = $target.find( 'input' ),
+            idx;
+
+        if ( ( idx = options.indexOf( val ) ) > -1 ) {
+            options.splice( idx, 1 );
+            setTimeout( function() { $inp.prop( 'checked', false ); filter();}, 0);
+        } else {
+            options.push( val );
+            setTimeout( function() { $inp.prop( 'checked', true ); filter(); }, 0);
+        }
+        $( event.target ).blur();
+        return false;
+    });
+
+    
+</script>
+</body>
+
 </html>

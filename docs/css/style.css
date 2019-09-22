@@ -1,5 +1,25 @@
-body {
-  margin-top: 30px;
-  background-color: #eee;
+.desc_top {
+    position: absolute;
+    top: -3em;
 }
-
+.desc_bottom {
+    position: absolute;
+    top: 3em;
+}
+.node {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 99;
+}
+.highlight {
+    background-color: yellow;
+}
+ 
+*{
+    font-family:"Roboto";
+}
