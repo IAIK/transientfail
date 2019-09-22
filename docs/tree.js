@@ -1012,7 +1012,7 @@ var data = [{
         alias: "ZombieLoad",
         img: "zombieload.svg",
         father: 16,
-        description: "ZombieLoad uses various architectural and microarchitectural faults to leak data from the fill buffers. In contrast to Meltdown-US-L1, only the least-significant 12 bits of the virtual address can be used to address the data, thus giving less control over which data is leaked. However, this allows ZombieLoad to cross all privilege boundaries (user-to-user, kernel, Intel SGX, VM-to-VM, VM-to-hypervisor).",
+        description: "ZombieLoad uses various architectural and microarchitectural faults to leak data from the fill buffers. In contrast to Meltdown-US-L1, only the least-significant 6 bits of the virtual address can be used to address the data, thus giving less control over which data is leaked. However, this allows ZombieLoad to cross all privilege boundaries (user-to-user, kernel, Intel SGX, VM-to-VM, VM-to-hypervisor).",
         sources: [
             sources["Schwarz2019"],
             sources["VanSchaik2019"],
@@ -1172,7 +1172,7 @@ var data = [{
         alias: "RIDL",
         img: "mds.svg",
         father: 17,
-        description: "RIDL leaks in-flight data from the line-fill buffer (LFB) by exploiting faulting loads on non-present addresses. If the least-significant 12 bits of the non-present virtual address match a virtual address of data currently stored in the LFB. Any data travelling between the L1 cache and the remaining memory subsystem has to go through the LFB and can be leaked with RIDL.",
+        description: "RIDL leaks in-flight data from the line-fill buffer (LFB) by exploiting faulting loads on non-present addresses. If the least-significant 6 bits of the non-present virtual address match a virtual address of data currently stored in the LFB. Any data travelling between the L1 cache and the remaining memory subsystem has to go through the LFB and can be leaked with RIDL.",
         sources: [
             sources["VanSchaik2019"],
             sources["Schwarz2019"],
@@ -1397,7 +1397,7 @@ var data = [{
         alias: "ZombieLoad",
         img: "zombieload.svg",
         father: 53,
-        description: "ZombieLoad uses various architectural and microarchitectural faults to leak data from the fill buffers. In contrast to Meltdown-US-L1, only the least-significant 12 bits of the virtual address can be used to address the data, thus giving less control over which data is leaked. However, this allows ZombieLoad to cross all privilege boundaries (user-to-user, kernel, Intel SGX, VM-to-VM, VM-to-hypervisor). In this variant, exploited fault is the microcode assist which is required for setting the accessed or dirty bit in a page-table entry.",
+        description: "ZombieLoad uses various architectural and microarchitectural faults to leak data from the fill buffers. In contrast to Meltdown-US-L1, only the least-significant 6 bits of the virtual address can be used to address the data, thus giving less control over which data is leaked. However, this allows ZombieLoad to cross all privilege boundaries (user-to-user, kernel, Intel SGX, VM-to-VM, VM-to-hypervisor). In this variant, exploited fault is the microcode assist which is required for setting the accessed or dirty bit in a page-table entry.",
         sources: [
             sources["Schwarz2019"],
         ],
