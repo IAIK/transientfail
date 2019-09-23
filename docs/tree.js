@@ -643,7 +643,7 @@ var data = [{
         description: "The cross-address-space, out-of-place variant of Spectre-PHT.",
         poc: [{
             title: "https://github.com/IAIK/transientfail",
-            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/PHT/ca_op"
+            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/PHT/ca_oop"
         }],
         sources: [
             sources["Canella2018"]
@@ -706,7 +706,7 @@ var data = [{
         description: "The same-address-space, out-of-place variant of Spectre-PHT.",
         poc: [{
             title: "https://github.com/IAIK/transientfail",
-            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/PHT/sa_op"
+            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/PHT/sa_oop"
         }],
         affects: [
             {
@@ -770,7 +770,7 @@ var data = [{
         description: "The cross-address-space, out-of-place variant of Spectre-BTB. This was one of the first discovered variants.",
         poc: [{
             title: "https://github.com/IAIK/transientfail",
-            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/BTB/ca_op"
+            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/BTB/ca_oop"
         }],
         sources: [
             sources["Kocher2019"],
@@ -826,7 +826,7 @@ var data = [{
         description: "The same-address-space, out-of-place variant of Spectre-BTB.",
         poc: [{
             title: "https://github.com/IAIK/transientfail",
-            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/BTB/sa_op"
+            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/BTB/sa_oop"
         }],
         sources: [
             sources["Chen2019"],
@@ -877,7 +877,7 @@ var data = [{
         description: "The cross-address-space, out-of-place variant of Spectre-RSB.",
         poc: [{
             title: "https://github.com/IAIK/transientfail",
-            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/RSB/ca_op"
+            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/RSB/ca_oop"
         }],
         sources: [
             sources["Koruyeh2018"],
@@ -930,7 +930,7 @@ var data = [{
         description: "The same-address-space, out-of-place variant of Spectre-RSB.",
         poc: [{
             title: "https://github.com/IAIK/transientfail",
-            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/RSB/sa_op"
+            url: "https://github.com/IAIK/transientfail/tree/master/pocs/spectre/RSB/sa_oop"
         }],
         sources: [
             sources["Koruyeh2018"],
