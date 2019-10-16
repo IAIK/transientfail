@@ -29,3 +29,4 @@ In this PoC, we try to encode a value in the cache following an illegal opcode e
     + **Solution #2:** Cause a lot of interrupts by running e.g. `stress -i 1 -d 1`. This can be combined with Solution #1".
     + **Solution #3:** Manually set the variable `CACHE_MISS` in main.c to a threshold which allows distinguishing cache hits from misses.
     + **Solution #4 (ARM only):** Try a different method to measure time: Change the ARM_CLOCK_SOURCE in libcache/cache.h to ARM_PERF, ARM_CLOCK_MONOTONIC, or ARM_TIMER.
+    + **Solution #5 (ARM only):** If you get a segfault, try compiling it with -O1 or -O2.

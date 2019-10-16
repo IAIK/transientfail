@@ -43,7 +43,7 @@ int main(void) {
       asm volatile(".byte 0xf0");
       asm volatile("inc %rax");
 #else
-	    asm volatile (".word 0xf7f0a000\n"); //raises sigill
+	    asm volatile (".word 0x00000000\n"); //raises sigill
 #endif
       // Encode in the cache
       maccess(mem + (*buffer) * pagesize);
