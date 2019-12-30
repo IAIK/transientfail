@@ -1523,5 +1523,125 @@ var data = [{
         ],
         color: color.works
     },
+    {
+        id: 60,
+        title: "Meltdown-TAA",
+        father: 52,
+        description: "Attackers might attempt to abuse TSX asynchronous aborts (TAA) to leak CPU data from the fill buffer, store buffer, and load ports.",
+        alias: "ZombieLoad v2",
+        img: "zombieload.svg",
+        sources: [
+            sources["Schwarz2019"],
+        ],
+        names: [
+            {
+                title: "TSX Asynchronous Aborts (TAA)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-transactional-synchronization-extensions-intel-tsx-asynchronous-abort"
+            },
+            {
+                title: "ZombieLoad v2",
+                url: "https://zombieloadattack.com/"
+            },
+            {
+                title: "RIDL Addendum",
+                url: "https://mdsattacks.com/files/ridl-addendum.pdf"
+            }
+        ],
+        cve: [{
+            title: "CVE-2019-11135",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2019-11135"
+        }],
+        color: color.group
+    },
+    {
+        id: 61,
+        title: "Meltdown-TAA-LFB",
+        father: 60,
+        description: "Attackers might attempt to abuse TSX asynchronous aborts (TAA) to leak CPU data from the fill buffer.",
+        alias: "ZombieLoad v2",
+        img: "zombieload.svg",
+        sources: [
+            sources["Schwarz2019"],
+        ],
+        names: [
+            {
+                title: "TSX Asynchronous Aborts (TAA)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-transactional-synchronization-extensions-intel-tsx-asynchronous-abort"
+            },
+            {
+                title: "ZombieLoad v2",
+                url: "https://zombieloadattack.com/"
+            },
+            {
+                title: "RIDL Addendum",
+                url: "https://mdsattacks.com/files/ridl-addendum.pdf"
+            }
+        ],
+        cve: [{
+            title: "CVE-2019-11135",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2019-11135"
+        }],
+        color: color.works
+    },
+    {
+        id: 62,
+        title: "Meltdown-TAA-LP",
+        father: 60,
+        description: "Attackers might attempt to abuse TSX asynchronous aborts (TAA) to leak CPU data from the load port write back data bus.",
+        alias: "ZombieLoad v2",
+        img: "zombieload.svg",
+        sources: [
+            sources["Schwarz2019"],
+        ],
+        names: [
+            {
+                title: "TSX Asynchronous Aborts (TAA)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-transactional-synchronization-extensions-intel-tsx-asynchronous-abort"
+            },
+            {
+                title: "ZombieLoad v2",
+                url: "https://zombieloadattack.com/"
+            },
+            {
+                title: "RIDL Addendum",
+                url: "https://mdsattacks.com/files/ridl-addendum.pdf"
+            }
+        ],
+        cve: [{
+            title: "CVE-2019-11135",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2019-11135"
+        }],
+        color: color.works
+    },
+    {
+        id: 63,
+        title: "Meltdown-TAA-SB",
+        father: 60,
+        description: "Attackers might attempt to abuse TSX asynchronous aborts (TAA) to leak CPU data from the store buffer.",
+        alias: "ZombieLoad v2",
+        img: "zombieload.svg",
+        sources: [
+            sources["Schwarz2019"],
+        ],
+        names: [
+            {
+                title: "TSX Asynchronous Aborts (TAA)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-transactional-synchronization-extensions-intel-tsx-asynchronous-abort"
+            },
+            {
+                title: "ZombieLoad v2",
+                url: "https://zombieloadattack.com/"
+            },
+            {
+                title: "RIDL Addendum",
+                url: "https://mdsattacks.com/files/ridl-addendum.pdf"
+            }
+        ],
+        cve: [{
+            title: "CVE-2019-11135",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2019-11135"
+        }],
+        color: color.works
+    },
 ];
 var current_data = data;
