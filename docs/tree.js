@@ -285,15 +285,22 @@ var data = [{
         id: 12,
         title: "Meltdown-UD",
         father: 3,
-        description: "On our test systems, we did not succeed in transiently executing instructions following an invalid opcode. We suspect that exceptions during instruction fetch or decode are immediately handled by the CPU, without first buffering the offending instruction in the ROB. Moreover, as invalid opcodes have an undefined length, the CPU does not even know where the next instruction starts. Hence, we suspect that invalid opcodes only leak if the microarchitectural effect is already an effect caused by the invalid opcode itself, not by subsequent transient instructions.",
+        description: "For our original paper we did not succeed in transiently executing instructions following an invalid opcode. Google's Safeside project subsequently achieved this on ARM, and we have updated our PoC accordingly. We suspect that on Intel and AMD CPUs exceptions during instruction fetch or decode are immediately handled by the CPU, without first buffering the offending instruction in the ROB. Hence, invalid opcodes would only leak if the microarchitectural effect is an effect caused by the invalid opcode itself, rather than by subsequent transient instructions.",
         sources: [
             sources["Canella2018"]
         ],
         poc: [{
             title: "https://github.com/IAIK/transientfail",
             url: "https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/UD"
+        },
+        {
+            title: "https://github.com/google/safeside",
+            url: "https://github.com/google/safeside/blob/master/demos/meltdown_ud.cc"
         }],
-        color: color.fails
+        affects: [{
+            title: "ARM",
+        }],
+        color: color.works
     },
     {
         id: 13,
