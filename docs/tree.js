@@ -11,7 +11,7 @@ var data = [{
         title: "Transient cause",
         father: null,
         img: "transient-overview.svg",
-        description: "We split the tree based on what the cause for entering transient execution is. If the cause is the handling of a fault or microcode assist upon instruction retirement, we have a Meltdown-type attack. If the cause is a control or data flow prediction, we have a Spectre-type attack.",
+        description: "We split the tree based on the cause for entering transient execution. If the cause is handling a fault or a microcode assist upon instruction retirement, we have a Meltdown-type attack. If the cause is a control or data flow prediction, we have a Spectre-type attack.",
         sources: [
             sources["Canella2018"],
             sources["Kocher2019"],
@@ -38,7 +38,7 @@ var data = [{
         img: "meltdown-root.svg",
         text_bottom: "fault/assist",
         father: 1,
-        description: "Meltdown exploits that exceptions are only raised (i.e., become architecturally visible) upon the retirement of the faulting instruction. In some microarchitectures, this property allows transient instructions ahead in the pipeline to compute on unauthorized results of the instruction that is about to suffer a fault. The CPU's in-order instruction-retirement mechanism takes care to discard any architectural effects of such computations, but secrets may leak through microarchitectural covert channels.<p/>We further classify Meltdown-type attacks based on the fault condition. A first category of <i>architectural faults</i> iterates over all possible Intel x86 exception types. A second category considers so-called <i>microarchitectural faults</i>, which are never visible at the architectural level, by branching on different conditions that provoke microcode assists.<p/>The resulting unambiguous naming scheme results in Meltdown-type attack leaves of the form “Meltdown-TC-BUF”, where TC denotes the transient cause (specific exception type or microcode assist) and BUF denotes the microarchitectural buffer responsible for the leakage.",
+        description: "Meltdown exploits the fact that exceptions are only raised (i.e., become architecturally visible) upon the retirement of the faulting instruction. In some microarchitectures, this property allows transient instructions ahead in the pipeline to compute on unauthorized results of the instruction that is about to suffer a fault. The CPU's in-order instruction-retirement mechanism takes care to discard any architectural effects of such computations, but secrets may leak through microarchitectural covert channels.<p/>We further classify Meltdown-type attacks based on the fault condition. A first category of <i>architectural faults</i> iterates over all possible Intel x86 exception types. A second category considers so-called <i>microarchitectural faults</i>, which are never visible at the architectural level, by branching on different conditions that provoke microcode assists.<p/>The resulting unambiguous naming scheme results in Meltdown-type attack leaves of the form “Meltdown-TC-BUF”, where TC denotes the transient cause (specific exception type or microcode assist) and BUF denotes the microarchitectural buffer responsible for the leakage.",
         sources: [
             sources["Lipp2018"],
             sources["VanBulck2018"],
@@ -98,7 +98,7 @@ var data = [{
         alias: "Spectre v2",
         img: "spectre.svg",
         father: 2,
-        description: "In Spectre-BTB, the attacker poisons the Branch Target Buffer (BTB) to steer the transient execution to a mispredicted branch target. For direct branches, the CPU indexes the BTB using a subset of the virtual address bits of the branch instruction to yield the predicted jump target. For indirect branches, CPUs use different mechanisms, which may take into account global branching history accumulated in the BHB when indexing the BTB. We refer to both types as Spectre-BTB.<p>Contrary to Spectre-PHT, where transient instructions execute along a restricted mispredicted path, Spectre-BTB allows redirecting transient control flow to an arbitrary destination. Adopting established techniques from return-oriented programming (ROP) attacks, but abusing BTB poisoning instead of application-level vulnerabilities, selected code “gadgets” found in the victim address space may be chained together to construct arbitrary transient instruction sequences. Hence, where the success of SpectrePHT critically relies on unintended leakage along the mispredicted code path, ROP-style gadget abuse in Spectre-BTB allows to more directly construct covert channels that expose secrets from the transient domain.",
+        description: "In Spectre-BTB, the attacker poisons the Branch Target Buffer (BTB) to steer the transient execution to a mispredicted branch target. For direct branches, the CPU indexes the BTB using a subset of the virtual address bits of the branch instruction to yield the predicted jump target. For indirect branches, CPUs use different mechanisms, which may take into account global branching history accumulated in the BHB when indexing the BTB. We refer to both types as Spectre-BTB.<p>Contrary to Spectre-PHT, where transient instructions execute along a restricted mispredicted path, Spectre-BTB enables redirection of transient control flow to an arbitrary destination. Adopting established techniques from return-oriented programming (ROP) attacks, but abusing BTB poisoning instead of application-level vulnerabilities, selected code “gadgets” found in the victim address space may be chained together to construct arbitrary transient instruction sequences. Hence, while the success of Spectre-PHT critically relies on unintended leakage along the mispredicted code path, ROP-style gadget abuse in Spectre-BTB enables more direct construction of covert channels that expose secrets from the transient domain.",
         sources: [
             sources["Kocher2019"],
             sources["Canella2018"]
@@ -135,7 +135,7 @@ var data = [{
         alias: "ret2spec",
         img: "spectre.svg",
         father: 2,
-        description: "Maisuradze and Rossow and Koruyeh et al. introduced a Spectre variant that exploits the Return Stack Buffer (RSB). The RSB is a small per-core microarchitectural buffer that stores the virtual addresses following the N most recent call instructions. When encountering a ret instruction, the CPU pops the topmost element from the RSB to predict the return flow.<p>Misspeculation arises whenever the RSB layout diverges from the actual return addresses on the software stack. Such disparity for instance naturally occurs when restoring kernel/enclave/user stack pointers upon protection domain switches.<p>Furthermore, same-address-space adversaries may explicitly overwrite return addresses on the software stack, or transiently execute call instructions which update the RSB without committing architectural effects. This may allow untrusted code executing in a sandbox to transiently divert return control flow to interesting code gadgets outside of the sandboxed environment.<p>Due to the fixed-size nature of the RSB, a special case of misspeculation occurs for deeply nested function calls. Since the RSB can only store return addresses for the N most recent calls, an underfill occurs when the software stack is unrolled. In this case, the RSB can no longer provide accurate predictions. Starting from Skylake, Intel CPUs use the BTB as a fallback, thus allowing Spectre-BTB-style attacks triggered by ret instructions.",
+        description: "Maisuradze and Rossow and Koruyeh et al. introduced a Spectre variant that exploits the Return Stack Buffer (RSB). The RSB is a small per-core microarchitectural buffer that stores the virtual addresses following the N most recent <code>call</code> instructions. When encountering a <code>ret</code> instruction, the CPU pops the topmost element from the RSB to predict the return flow.<p>Misspeculation arises whenever the RSB layout diverges from the actual return addresses on the software stack. Such disparity for instance naturally occurs when restoring kernel/enclave/user stack pointers upon protection domain switches.<p>Furthermore, same-address-space adversaries may explicitly overwrite return addresses on the software stack, or transiently execute <code>call</code> instructions which update the RSB without committing architectural effects. This may allow untrusted code executing in a sandbox to transiently divert return control flow to interesting code gadgets outside of the sandboxed environment.<p>Due to the fixed-size nature of the RSB, a special case of misspeculation occurs for deeply nested function calls. Since the RSB can only store return addresses for the N most recent calls, an underfill occurs when the software stack is unrolled. In this case, the RSB can no longer provide accurate predictions. Starting from Skylake, Intel CPUs use the BTB as a fallback, thus allowing Spectre-BTB-style attacks triggered by <code>ret</code> instructions.",
         sources: [
             sources["Maisuradze2018"],
             sources["Koruyeh2018"],
@@ -167,7 +167,7 @@ var data = [{
         alias: "Spectre v4",
         img: "spectre.svg",
         father: 2,
-        description: "Speculation in modern CPUs is not restricted to control flow but also includes predicting dependencies in the data flow. A common type of Store To Load (STL) dependencies require that a memory load shall not be executed before all preceding stores that write to the same location have completed. However, even before the addresses of all prior stores in the pipeline are known, the CPUs' memory disambiguator may predict which loads can already be executed speculatively. <p>When the disambiguator predicts that a load does not have a dependency on a prior store, the load reads data from the L1 data cache. When the addresses of all prior stores are known, the prediction is verified. If any overlap is found, the load and all following instructions are re-executed. </p><p>Jann Horn (Google Project Zero) showed how mispredictions by the memory disambiguator could be abused to speculatively bypass store instructions. Like previous attacks, Spectre-STL adversaries rely on an appropriate transient instruction sequence to leak unsanitized stale values via a microarchitectural covert channel. Furthermore, operating on stale pointer values may speculatively break type and memory safety guarantees in the transient execution domain. </p>",
+        description: "Speculation in modern CPUs is not restricted to control flow but also includes predicting dependencies in the data flow. A common type, a Store To Load (STL) dependency, requires that a memory load shall not be executed before all preceding stores writing to the same location have completed. However, even before the addresses of all prior stores in the pipeline are known, the CPU's memory disambiguator may predict which loads can already be executed speculatively. <p>When the disambiguator predicts that a load does not have a dependency on a prior store, the load reads data from the L1 data cache. When the addresses of all prior stores are known, the prediction is verified. If any overlap is found, the load and all following instructions are re-executed. </p><p>Jann Horn (Google Project Zero) showed how mispredictions by the memory disambiguator could be abused to speculatively bypass store instructions. Like previous attacks, Spectre-STL adversaries rely on an appropriate transient instruction sequence to leak unsanitized stale values via a microarchitectural covert channel. Furthermore, operating on stale pointer values may speculatively break type and memory safety guarantees in the transient execution domain. </p>",
         sources: [
             sources["Horn2018"],
             sources["Canella2018"]
@@ -260,7 +260,7 @@ var data = [{
         id: 10,
         title: "Meltdown-DE",
         father: 3,
-        description: "On the ARMs we tested, there is no exception following the signed divison instruction, but the division yields merely zero. On x86, the division raises a divide-by-zero exception (#DE). Both on the AMD and Intel we tested, the CPU continues with the transient execution after the exception. In both cases, the result register is set to ‘0’, which is the same result as on the tested ARM. Thus, according to our experiments Meltdown-DE is not possible, as no real values are leaked.",
+        description: "On the ARMs we tested, there is no exception following the signed division instruction, but the division yields merely zero. On x86, the division raises a divide-by-zero exception (#DE). Both on the AMD and Intel we tested, the CPU continues with the transient execution after the exception. In both cases, the result register is set to ‘0’, which is the same result as on the tested ARM. Thus, according to our experiments Meltdown-DE is not possible, as no real values are leaked.",
         sources: [
             sources["Canella2018"]
         ],
@@ -411,7 +411,7 @@ var data = [{
         title: "Meltdown-PK-L1",
         img: "pte-pk.svg",
         father: 11,
-        description: "Intel Skylake-SP server CPUs support memory-protection keys for user space (PKU). This feature allows processes to change the access permissions of a page directly from user space, i.e., without requiring a syscall/hypercall. Thus, with PKU, user-space applications can implement efficient hardware-enforced isolation of trusted parts. A Meltdown-PK attack allows to bypass both read and write isolation provided by PKU. Meltdown-PK works if an attacker has code execution in the containing process, even if the attacker cannot execute the wrpkru instruction (e.g., blacklisting).",
+        description: "Intel Skylake-SP server CPUs support memory-protection keys for user space (PKU). This feature allows processes to change the access permissions of a page directly from user space, i.e., without requiring a syscall/hypercall. Thus, with PKU, user-space applications can implement efficient hardware-enforced isolation of trusted parts. A Meltdown-PK attack bypasses both the read and write isolation provided by the PKU. Meltdown-PK works if an attacker has code execution in the containing process, even if the attacker cannot execute the <code>wrpkru</code> instruction (e.g., blacklisting).",
         todo: "We encourage exploring the possibility of using Meltdown-PK to leak data from other buffers apart from the L1 cache.",
         sources: [
             sources["Canella2018"]
@@ -524,7 +524,7 @@ var data = [{
         id: 24,
         title: "Cross-address-space",
         text_top: "mistraining strategy",
-        description: "In a cross-address-space scenario, an attacker has two options. In the first, an attacker can mirror the virtual address space layout of the victim on a hyperthread (same phyiscal core) and mistrain at the exact same virtual address as the victim branch. We refer to this as cross-address-space in-place (CA-IP). In the second, the attacker mistrains the PHT on a congruent virtual address in a differnet address space. We refer to this as cross-address-space out-of-place (CA-OP). Cross-address-space attacks are possible as the PHT is shared between hyperthreads on the same logical core.",
+        description: "In a cross-address-space scenario, an attacker has two options. In the first, an attacker can mirror the virtual address space layout of the victim on a hyperthread (same physical core) and mistrain at the exact same virtual address as the victim branch. We refer to this as cross-address-space in-place (CA-IP). In the second, the attacker mistrains the PHT on a congruent virtual address in a different address space. We refer to this as cross-address-space out-of-place (CA-OP). Cross-address-space attacks are possible because the PHT is shared between hyperthreads on the same logical core.",
         sources: [
             sources["Canella2018"]
         ],
@@ -539,7 +539,7 @@ var data = [{
         id: 25,
         title: "Same-address-space",
         father: 4,
-        description: "In a same-address-space scenario, an attacker has two options. The first option is to mistrain the exact location that is later on attacked.We refer to this as same-address-space in-place (SA-IP), In the second scenario, a congruent address is used for the mistraining. This is possible as only a subset of the virtual address is used for indexing the PHT. We refer to this as same-address-space out-of-place (SA-OP).",
+        description: "In a same-address-space scenario, an attacker has two options. The first option is to mistrain the exact location that is later on attacked. We refer to this as same-address-space in-place (SA-IP), In the second scenario, a congruent address is used for the mistraining. This is possible because only a subset of the virtual address is used for indexing the PHT. We refer to this as same-address-space out-of-place (SA-OP).",
         sources: [
             sources["Kocher2019"],
             sources["Canella2018"]
@@ -554,7 +554,7 @@ var data = [{
         id: 26,
         title: "Cross-address-space",
         father: 5,
-        description: "In a cross-address-space scenario, an attacker has two options. In the first, an attacker can mirror the virtual address space layout of the victim on a hyperthread (same phyiscal core) and mistrain at the exact same virtual address as the victim branch. We refer to this as cross-address-space in-place (CA-IP). In the second, the attacker mistrains the BTB on a congruent virtual address in a differnet address space. We refer to this as cross-address-space out-of-place (CA-OP). Cross-address-space attacks are possible as the BTB is shared between hyperthreads on the same logical core.",
+        description: "In a cross-address-space scenario, an attacker has two options. In the first, an attacker can mirror the virtual address space layout of the victim on a hyperthread (same physical core) and mistrain at the exact same virtual address as the victim branch. We refer to this as cross-address-space in-place (CA-IP). In the second, the attacker mistrains the BTB on a congruent virtual address in a different address space. We refer to this as cross-address-space out-of-place (CA-OP). Cross-address-space attacks are possible because the BTB is shared between hyperthreads on the same logical core.",
         sources: [
             sources["Canella2018"]
         ],
@@ -568,7 +568,7 @@ var data = [{
         id: 27,
         title: "Same-address-space",
         father: 5,
-        description: "In a same-address-space scenario, an attacker has two options. The first option is to mistrain the exact location that is later on attacked.We refer to this as same-address-space in-place (SA-IP), In the second scenario, a congruent address is used for the mistraining. This is possible as only a subset of the virtual address is used for indexing the BTB. We refer to this as same-address-space out-of-place (SA-OP).",
+        description: "In a same-address-space scenario, an attacker has two options. The first option is to mistrain the exact location that is later on attacked. We refer to this as same-address-space in-place (SA-IP), In the second scenario, a congruent address is used for the mistraining. This is possible because only a subset of the virtual address is used for indexing the BTB. We refer to this as same-address-space out-of-place (SA-OP).",
         sources: [
             sources["Kocher2019"],
             sources["Canella2018"]
@@ -583,7 +583,7 @@ var data = [{
         id: 28,
         title: "Cross-address-space",
         father: 6,
-        description: "In a cross-address-space RSB attack, an attacker can not simply run on a hyperthread to influence the RSB. The reason for that is that the RSB is not shared between hyperthreads. Therefore, an attacker has to interleave the execution of the attacker program with the victim to poison the RSB. This is possible in both an in-place and out-of-place scenario.",
+        description: "In a cross-address-space RSB attack, an attacker cannot simply run on a hyperthread to influence the RSB. This is because the RSB is not shared between hyperthreads. Therefore, an attacker has to interleave the execution of their program with the victim's program to poison the RSB. This is possible in both in-place and out-of-place scenarios.",
         sources: [
             sources["Maisuradze2018"],
             sources["Koruyeh2018"],
@@ -599,7 +599,7 @@ var data = [{
         id: 29,
         title: "Same-address-space",
         father: 6,
-        description: "In a same-address-space RSB attack, an attacker can explicitly overwrite the retun address on the software stack or transiently execute call instructions. Another cause for misspeculation are deeply nested function calls. This is due to the limited size of the RSB. One natural occurence of RSB misspeculation is when restoring the kernel/enclave/user stack pointer upon switching a protection domain. In all those cases, the execution might be diverted to a special code gadget that leaks data.",
+        description: "In a same-address-space RSB attack, an attacker can explicitly overwrite the return address on the software stack or transiently execute <code>call</code> instructions. Another cause for misspeculation is deeply nested function calls. This is due to the limited size of the RSB. One natural occurrence of RSB misspeculation is when restoring the kernel/enclave/user stack pointer upon switching protection domains. In all those cases, the execution might be diverted to a special code gadget that leaks data.",
         sources: [
             sources["Maisuradze2018"],
             sources["Koruyeh2018"],
@@ -1061,7 +1061,7 @@ var data = [{
         alias: "Fallout",
         img: "mds.svg",
         father: 16,
-        description: "Fallout exploits that faulting loads can pick up previously stored values from the store buffer if the least-significant 12 bits of the virtual address match.",
+        description: "Fallout exploits the fact that faulting loads can pick up previously stored values from the store buffer if the least-significant 12 bits of the virtual address match.",
         sources: [
             sources["Minkin2019"],
             sources["IntelMDS"],
@@ -1097,7 +1097,7 @@ var data = [{
         title: "Meltdown-US-LP",
         father: 16,
         description: "Intel explains that faulting loads which span a 64-byte cacheline boundary may leak data from the processor's load ports.",
-        todo: "We encourage to experimentally confirm the possibility of reading CPU load port data through U/S exceptions.",
+        todo: "We encourage experimentation to confirm the possibility of reading CPU load port data through U/S exceptions.",
         sources: [
             sources["IntelMDS"],
         ],
@@ -1179,7 +1179,7 @@ var data = [{
         alias: "RIDL",
         img: "mds.svg",
         father: 17,
-        description: "RIDL leaks in-flight data from the line-fill buffer (LFB) by exploiting faulting loads on non-present addresses. If the least-significant 6 bits of the non-present virtual address match a virtual address of data currently stored in the LFB. Any data travelling between the L1 cache and the remaining memory subsystem has to go through the LFB and can be leaked with RIDL.",
+        description: "RIDL leaks in-flight data from the line-fill buffer (LFB) by exploiting faulting loads on non-present addresses. If the least-significant 6 bits of the non-present virtual address match a virtual address of data currently stored in the LFB, then this data can be leaked. Any data travelling between the L1 cache and the remaining memory subsystem has to go through the LFB and can be leaked with RIDL.",
         sources: [
             sources["VanSchaik2019"],
             sources["Schwarz2019"],
@@ -1217,7 +1217,7 @@ var data = [{
         alias: "Fallout",
         img: "mds.svg",
         father: 17,
-        description: "Fallout exploits that faulting loads due to a non-present page fault can pick up previously stored values from the store buffer if the least-significant 12 bits of the virtual addresses match.",
+        description: "Fallout exploits the fact that faulting loads due to a non-present page fault can pick up previously stored values from the store buffer if the least-significant 12 bits of the virtual addresses match.",
         sources: [
             sources["Minkin2019"],
             sources["IntelMDS"],
@@ -1290,7 +1290,7 @@ var data = [{
         title: "Meltdown-CPL-REG",
         alias: "v3a",
         father: 15,
-        description: "Meltdown-CPL-REG allows an attacker to read privileged system registers. It was first discovered and published by ARM and subsequently Intel determined that their CPUs are also susceptible to the attack. Accessing privileged system registers (e.g., via <code>rdmsr</code>) raises a general protection fault (#GP) when the current privilege level (CPL) is not zero. Similar to previous Meltdown-type attacks, however, the attack exploits that the transient execution following the faulting instruction can still compute on the unauthorized data, and leak the system register contents through a microarchitectural covert channel.",
+        description: "Meltdown-CPL-REG allows an attacker to read privileged system registers. It was first discovered and published by ARM and subsequently Intel determined that their CPUs are also susceptible to the attack. Accessing privileged system registers (e.g., via <code>rdmsr</code>) raises a general protection fault (#GP) when the current privilege level (CPL) is not zero. Similarly to previous Meltdown-type attacks, however, the attack exploits the fact that the transient execution following the faulting instruction can still compute on the unauthorized data, and leak the system register contents through a microarchitectural covert channel.",
         sources: [
             sources["ARM2018"],
             sources["Intel2018"],
@@ -1332,7 +1332,7 @@ var data = [{
         img: "mds.svg",
         father: 15,
         description: "Meltdown-NC-SB abuses #GP exceptions from non-canonical addresses to read data from the store buffer.",
-        todo: "We encourage to explore abusing non-canonical loads to leak data from other buffers.",
+        todo: "We encourage investigation of using non-canonical loads to leak data from other buffers.",
         sources: [
             sources["Minkin2019"],
             sources["IntelMDS"],
@@ -1368,7 +1368,7 @@ var data = [{
         title: "Meltdown-MCA",
         text_bottom: "fault/assist type",
         father: 3,
-        description: "To support more complex instructions, microcode allows implementing higher-level instructions using multiple hardware-level instructions. This allows processor vendors to support complex behavior and even extend or modify CPU behavior through microcode updates. While the execution units perform the fast-paths directly in hardware, more complex slow-path operations, such as faults or page-table modifications, are typically performed by issuing a microcode assist which points the sequencer to a predefined microcode routine. This microcode assist triggers a machine clear, which flushes the pipeline. On a pipeline flush, instructions which are already in flight still finish execution, which can leak to a Meltdown effect.</p>Microcode assists can be caused in a variety of conditions, and have been abused to leak data from a variety of buffers. Our extensible classification therefore splits Meltdown-MCA further based on the specific microcode assist and targeted microarchitectural buffer.",
+        description: "To support more complex instructions, microcode enables higher-level instructions to be implemented using multiple hardware-level instructions. This allows processor vendors to support complex behavior and even extend or modify CPU behavior through microcode updates. While the execution units perform the fast-paths directly in hardware, more complex slow-path operations, such as faults or page-table modifications, are typically performed by issuing a microcode assist which points the sequencer to a predefined microcode routine. This microcode assist triggers a machine clear, which flushes the pipeline. On a pipeline flush, instructions which are already in flight still finish execution, which can leak, producing a Meltdown effect.</p>Microcode assists can be caused by a variety of conditions, and have been abused to leak data from a range of buffers. Our extensible classification therefore splits Meltdown-MCA further based on the specific microcode assist and targeted microarchitectural buffer.",
         todo: "We encourage to explore identifying more ways to trigger microcode assists.",
         sources: [
             sources["Schwarz2019"],
@@ -1382,7 +1382,7 @@ var data = [{
         title: "Meltdown-AD",
         img: "pte-ad.svg",
         father: 52,
-        description: "If a page-table walk requires an update to the access or dirty bits in one of the corresponding page-table entries, it falls back to a microcode assist. Such microcode-assisted page table walks have been abused to extract data from different buffer. We therefore categorize Meltdown-AD further by the leakage source.",
+        description: "If a page-table walk requires an update to the accessed or dirty bits in one of the corresponding page-table entries, it falls back to a microcode assist. Such microcode-assisted page table walks have been abused to extract data from different buffers. We therefore categorize Meltdown-AD further by the leakage source.",
         sources: [
             sources["Schwarz2019"],
             sources["Minkin2019"],
@@ -1394,8 +1394,8 @@ var data = [{
         id: 54,
         title: "Meltdown-AD-L1",
         father: 53,
-        description: "Attackers might attempt to abuse A/D microcode assists to read cached L1 data, but we did not experimentally confirm nor deny this possibility.",
-        todo: "We encourage to explore the possibility of reading L1-cached data through A/D microcode assists.",
+        description: "Attackers might attempt to abuse A/D microcode assists to read cached L1 data, but we have not experimentally confirmed that this is possible.",
+        todo: "We encourage investigation of reading L1-cached data through A/D microcode assists.",
         color: color.todo
     },
     {
@@ -1404,7 +1404,7 @@ var data = [{
         alias: "ZombieLoad",
         img: "zombieload.svg",
         father: 53,
-        description: "ZombieLoad uses various architectural and microarchitectural faults to leak data from the fill buffers. In contrast to Meltdown-US-L1, only the least-significant 6 bits of the virtual address can be used to address the data, thus giving less control over which data is leaked. However, this allows ZombieLoad to cross all privilege boundaries (user-to-user, kernel, Intel SGX, VM-to-VM, VM-to-hypervisor). In this variant, exploited fault is the microcode assist which is required for setting the accessed or dirty bit in a page-table entry.",
+        description: "ZombieLoad uses various architectural and microarchitectural faults to leak data from the fill buffers. In contrast to Meltdown-US-L1, only the least-significant 6 bits of the virtual address can be used to address the data, thus giving less control over which data is leaked. However, this allows ZombieLoad to cross all privilege boundaries (user-to-user, kernel, Intel SGX, VM-to-VM, VM-to-hypervisor). In this variant, the exploited fault is the microcode assist required for setting the accessed or dirty bit in a page-table entry.",
         sources: [
             sources["Schwarz2019"],
         ],
@@ -1444,7 +1444,7 @@ var data = [{
         alias: "Fallout",
         img: "mds.svg",
         father: 53,
-        description: "Fallout exploits that faulting loads can pick up previously stored values from the store buffer if the least-significant 12 bits of the virtual address match. This variant exploits that setting the accessed or dirty bit in the page-table entry leads to a microarchitectural fault in the form of a microcode assist.",
+        description: "Fallout exploits the fact that faulting loads can pick up previously stored values from the store buffer if the least-significant 12 bits of the virtual address match. This variant exploits the fact that setting the accessed or dirty bit in the page-table entry leads to a microarchitectural fault in the form of a microcode assist.",
         sources: [
             sources["Minkin2019"]
         ],
@@ -1478,8 +1478,8 @@ var data = [{
         id: 57,
         title: "Meltdown-AD-LP",
         father: 53,
-        description: "Attackers might attempt to abuse A/D microcode assists to read CPU load port data, but we did not experimentally confirm nor deny this possibility.",
-        todo: "We encourage to explore the possibility of reading CPU load port data through A/D microcode assists.",
+        description: "Attackers might attempt to abuse A/D microcode assists to read CPU load port data, but we have not experimentally confirmed that this is possible.",
+        todo: "We encourage investigation of reading CPU load port data through A/D microcode assists.",
         sources: [
             sources["IntelMDS"],
         ],
@@ -1504,7 +1504,7 @@ var data = [{
         title: "Meltdown-AVX-LP",
         father: 52,
         description: "According to Intel, certain vector SSE/AVX loads that are more than 64 bits in size may leak data from the processor's load ports.",
-        todo: "We encourage to explore abusing AVX loads to leak data from other buffers.",
+        todo: "We encourage investigation of using AVX loads to leak data from other buffers.",
         sources: [
             sources["IntelMDS"],
         ],
