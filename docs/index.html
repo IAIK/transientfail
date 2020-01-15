@@ -22,7 +22,7 @@
     <script src="js/filter.js"></script>
     <script src="js/export.js"></script>
     <script src="tree.js"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -40,7 +40,7 @@
                     <input type="checkbox" class="custom-control-input" id="toggleMeltdown" checked>
                     <label class="custom-control-label" for="toggleMeltdown">Meltdown</label>
                 </div>
- 
+
                 <div class="button-group custom-control-inline">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Buffer</button>
                     <ul class="dropdown-menu">
@@ -114,7 +114,7 @@
                         -->
                     </ul>
                 </div>
-                
+
                 <div class="button-group custom-control-inline">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">More filters</button>
                     <ul class="dropdown-menu">
@@ -142,13 +142,13 @@
                             <div class="custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="togglePaper" checked>
                                 <label class="custom-control-label" for="togglePaper">Academic paper</label>
-                            </div>   
+                            </div>
                         </a></li>
                         <li>&nbsp;<a>
                             <div class="custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="toggleNoPaper" checked>
                                 <label class="custom-control-label" for="toggleNoPaper">No academic paper</label>
-                            </div> 
+                            </div>
                         </a></li>
                         <hr>
                         -->
@@ -156,26 +156,26 @@
                             <div class="custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="togglePoC" checked>
                                 <label class="custom-control-label" for="togglePoC">With PoC</label>
-                            </div>   
+                            </div>
                         </a></li>
                         <li>&nbsp;<a>
                             <div class="custom-control custom-checkbox custom-control-inline">
                                 <input type="checkbox" class="custom-control-input" id="toggleNoPoC" checked>
                                 <label class="custom-control-label" for="toggleNoPoC">Without PoC</label>
-                            </div> 
+                            </div>
                         </a></li>
-                        
+
                     </ul>
                 </div>
-                
+
                 <div class="custom-control-inline">
                     <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" id="search">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
                     </div>
                 </div>
-                
-                
+
+
                 <div class="button-group custom-control-inline pull-right">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Export</button>
                     <ul class="dropdown-menu">
@@ -184,7 +184,36 @@
                         <li><a href="#" class="dropdown-item" onclick="exportDOT()">DOT</a></li>
                     </ul>
                 </div>
-                
+
+                <!-- Modal activation button -->
+                <div class="button-group custom-control-inline">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cite-modal">Cite</button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="cite-modal" tabindex="1" role="dialog" aria-labelledby="cite-modal" aria-hidden="true">
+                  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLongTitle">Bibtex Entry</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        @inproceedings{Canella2019extended,<br>
+                        &nbsp;&nbsp;title = {{A Systematic Evaluation of Transient Execution Attacks and Defenses}},<br>
+                        &nbsp;&nbsp;author = {Canella, Claudio and Van Bulck, Jo and Schwarz, Michael and Lipp, Moritz and von Berg, Benjamin and Ortner, Philipp and Piessens, Frank and Evtyushkin, D  mitry and Gruss, Daniel},<br>
+                        &nbsp;&nbsp;booktitle = {USENIX Security Symposium},<br>
+                        &nbsp;&nbsp;year = {2019},<br>
+                        &nbsp;&nbsp;note = {extended classification tree at https://transient.fail/},<br>
+                        &nbsp;}<br>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
             </form>
             <div id="tree" style="height:90vh;width:100%;z-index:0"></div>
