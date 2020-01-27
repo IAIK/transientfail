@@ -246,7 +246,7 @@ var data = [{
         title: "Meltdown-AC",
         alias: "",
         father: 3,
-        description: "Upon detecting an unaligned memory operand, the CPU may generate an alignment check exception (#AC). In our tests, the results of unaligned memory accesses never reach the transient execution. We suspect that this is because #AC is generated early-on, even before the operand’s virtual address is translated to a physical one. Hence, our experiments with Meltdown-AC were unsuccessful in showing any leakage.",
+        description: "Upon detecting an unaligned memory operand, the CPU may generate an alignment check exception (#AC). In our tests on Intel CPUs, we were unable to transiently encode the results of unaligned memory accesses. We suspect that this is because #AC is generated early in the pipeline, even before the operand’s virtual address is translated to a physical one. However, this appears not to be the case on some AMD and ARM microarchitectures, on which it is possible to transiently leak data after the exception.",
         sources: [
             sources["Canella2018"]
         ],
@@ -254,13 +254,22 @@ var data = [{
             title: "https://github.com/IAIK/transientfail",
             url: "https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/AC"
         }],
-        color: color.fails
+        affects: [
+            {
+                title: "AMD",
+                url: "https://www.amd.com/system/files/documents/security-whitepaper.pdf"
+            },
+            {
+                title: "ARM",
+            },
+        ],
+        color: color.works
     },
     {
         id: 10,
         title: "Meltdown-DE",
         father: 3,
-        description: "On the ARMs we tested, there is no exception following the signed division instruction, but the division yields merely zero. On x86, the division raises a divide-by-zero exception (#DE). Both on the AMD and Intel we tested, the CPU continues with the transient execution after the exception. In both cases, the result register is set to ‘0’, which is the same result as on the tested ARM. Thus, according to our experiments Meltdown-DE is not possible, as no real values are leaked.",
+        description: "On the ARM microarchitectures we tested, division by zero produces no exception, merely yielding zero. As there is no fault, we do not count this as a Meltdown variant on ARM. On x86, the division raises a divide-by-zero exception (#DE). On both the AMD and Intel microarchitectures we tested, the CPU continues with transient execution after the exception, using zero as the result of the division. Thus the division itself does not leak a value (for example the numerator) but subsequent transient execution can still be used to leak values.", 
         sources: [
             sources["Canella2018"]
         ],
@@ -268,7 +277,15 @@ var data = [{
             title: "https://github.com/IAIK/transientfail",
             url: "https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/DE"
         }],
-        color: color.fails
+        affects: [
+            {
+                title: "Intel",
+            },
+            {
+                title: "AMD",
+            },
+        ],
+        color: color.works
     },
     {
         id: 11,
@@ -306,7 +323,7 @@ var data = [{
         id: 13,
         title: "Meltdown-SS",
         father: 3,
-        description: "We consistently found that out-of-limit segment accesses never reach transient execution in our experiments. We suspect that, due to the simplistic IA32 segmentation design, segment limits are validated early-on, and immediately raise a #GP or #SS (stack-segment fault) exception, without sending the offending instruction to the ROB. Therefore, we observed no leakage in our experiments with Meltdown-SS.",
+        description: "We reliably found in our experiments on Intel CPUs that we cannot transiently leak the results of out-of-limit segment accesses. We suspect that, due to the simplistic IA32 segmentation design, segment limits are validated early-on, and immediately raise a #GP or #SS (stack-segment fault) exception, without sending the offending instruction to the ROB. However, we have successfully reproduced Meltdown-SS on some AMD microarchitectures, which is consistent with AMD's documentation that #SS does not suppress speculation.",
         sources: [
             sources["Canella2018"]
         ],
@@ -314,7 +331,13 @@ var data = [{
             title: "https://github.com/IAIK/transientfail",
             url: "https://github.com/IAIK/transientfail/tree/master/pocs/meltdown/SS"
         }],
-        color: color.fails
+        affects: [
+            {
+                title: "AMD",
+                url: "https://www.amd.com/system/files/documents/security-whitepaper.pdf"
+            }
+        ],
+        color: color.works
     },
     {
         id: 14,
@@ -399,6 +422,9 @@ var data = [{
             {
                 title: "Intel",
                 url: "https://www.intel.com/content/www/us/en/support/articles/000029382/processors.html"
+            },
+            {
+                title: "AMD",
             },
             {
                 title: "ARM",
