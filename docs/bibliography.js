@@ -88,10 +88,11 @@ var sources = {
             url: "https://mdsattacks.com/files/ridl.pdf",
             conference: "IEEE S&P 2019"
     },
-    "Minkin2019": {
-            title: "Fallout: Reading Kernel Writes From User Space",
-            author: "Marina Minkin, Daniel Moghimi, Moritz Lipp, Michael Schwarz, Jo Van Bulck, Daniel Genkin, Daniel Gruss, Frank Piessens, Berk Sunar, Yuval Yarom",
-            url: "https://arxiv.org/pdf/1905.12701.pdf"
+    "Canella2019": {
+            title: "Fallout: Leaking Data on Meltdown-Resistant CPUs",
+            author: "Claudio Canella, Daniel Genkin, Lukas Giner, Daniel Gruss, Moritz Lipp, Marina Minkin, Daniel Moghimi, Frank Piessens, Michael Schwarz, Berk Sunar, Jo Van Bulck, Yuval Yarom",
+            url: "https://dl.acm.org/doi/abs/10.1145/3319535.3363219",
+            conference: "ACM CCS 2019"
     },
     "IntelMDS": {
             url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling",

@@ -43,7 +43,7 @@ var data = [{
             sources["Lipp2018"],
             sources["VanBulck2018"],
             sources["VanSchaik2019"],
-            sources["Minkin2019"],
+            sources["Canella2019"],
             sources["Schwarz2019"],
             sources["Canella2018"],
         ],
@@ -364,7 +364,7 @@ var data = [{
             sources["Canella2018"],
             sources["ARM2018"],
             sources["Intel2018"],
-            sources["Minkin2019"]
+            sources["Canella2019"]
         ],
         color: color.group
     },
@@ -377,7 +377,7 @@ var data = [{
         sources: [
             sources["Lipp2018"],
             sources["Schwarz2019"],
-            sources["Minkin2019"],
+            sources["Canella2019"],
             sources["Canella2018"]
         ],
         color: color.group
@@ -391,7 +391,7 @@ var data = [{
         sources: [
             sources["VanBulck2018"],
             sources["VanSchaik2019"],
-            sources["Minkin2019"],
+            sources["Canella2019"],
             sources["Canella2018"]
         ],
         color: color.group
@@ -474,7 +474,7 @@ var data = [{
         description: "Although supervisor mode access prevention (SMAP) raises a page fault (#PF) when accessing user-space memory from the kernel, it seems to be free of any Meltdown effect in our experiments. Thus, we were not able to leak user data from kernel space using Meltdown-SM in our experiments.<p/>However, the Fallout paper includes an experiment to leak store buffer data using SMAP exceptions from kernel space.",
         sources: [
             sources["Canella2018"],
-            sources["Minkin2019"]
+            sources["Canella2019"]
         ],
         names: [
             {
@@ -1089,7 +1089,7 @@ var data = [{
         father: 16,
         description: "Fallout exploits the fact that faulting loads can pick up previously stored values from the store buffer if the least-significant 12 bits of the virtual address match.",
         sources: [
-            sources["Minkin2019"],
+            sources["Canella2019"],
             sources["IntelMDS"],
         ],
         names: [
@@ -1245,7 +1245,7 @@ var data = [{
         father: 17,
         description: "Fallout exploits the fact that faulting loads due to a non-present page fault can pick up previously stored values from the store buffer if the least-significant 12 bits of the virtual addresses match.",
         sources: [
-            sources["Minkin2019"],
+            sources["Canella2019"],
             sources["IntelMDS"],
         ],
         names: [
@@ -1360,7 +1360,7 @@ var data = [{
         description: "Meltdown-NC-SB abuses #GP exceptions from non-canonical addresses to read data from the store buffer.",
         todo: "We encourage investigation of using non-canonical loads to leak data from other buffers.",
         sources: [
-            sources["Minkin2019"],
+            sources["Canella2019"],
             sources["IntelMDS"],
         ],
         names: [
@@ -1395,10 +1395,10 @@ var data = [{
         text_bottom: "fault/assist type",
         father: 3,
         description: "To support more complex instructions, microcode enables higher-level instructions to be implemented using multiple hardware-level instructions. This allows processor vendors to support complex behavior and even extend or modify CPU behavior through microcode updates. While the execution units perform the fast-paths directly in hardware, more complex slow-path operations, such as faults or page-table modifications, are typically performed by issuing a microcode assist which points the sequencer to a predefined microcode routine. This microcode assist triggers a machine clear, which flushes the pipeline. On a pipeline flush, instructions which are already in flight still finish execution, which can leak, producing a Meltdown effect.</p>Microcode assists can be caused by a variety of conditions, and have been abused to leak data from a range of buffers. Our extensible classification therefore splits Meltdown-MCA further based on the specific microcode assist and targeted microarchitectural buffer.",
-        todo: "We encourage to explore identifying more ways to trigger microcode assists.",
+        todo: "We encourage exploration of other microcode assist triggers.",
         sources: [
             sources["Schwarz2019"],
-            sources["Minkin2019"],
+            sources["Canella2019"],
             sources["IntelMDS"],
         ],
         color: color.group
@@ -1411,7 +1411,7 @@ var data = [{
         description: "If a page-table walk requires an update to the accessed or dirty bits in one of the corresponding page-table entries, it falls back to a microcode assist. Such microcode-assisted page table walks have been abused to extract data from different buffers. We therefore categorize Meltdown-AD further by the leakage source.",
         sources: [
             sources["Schwarz2019"],
-            sources["Minkin2019"],
+            sources["Canella2019"],
             sources["IntelMDS"],
         ],
         color: color.group
@@ -1472,7 +1472,7 @@ var data = [{
         father: 53,
         description: "Fallout exploits the fact that faulting loads can pick up previously stored values from the store buffer if the least-significant 12 bits of the virtual address match. This variant exploits the fact that setting the accessed or dirty bit in the page-table entry leads to a microarchitectural fault in the form of a microcode assist.",
         sources: [
-            sources["Minkin2019"]
+            sources["Canella2019"]
         ],
         names: [
             {
