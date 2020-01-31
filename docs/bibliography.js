@@ -88,6 +88,12 @@ var sources = {
             url: "https://mdsattacks.com/files/ridl.pdf",
             conference: "IEEE S&P 2019"
     },
+    "RIDLAddendum1": {
+            title: "Addendum 1 to RIDL: Rogue In-flight Data Load",
+            author: "Stephan van Schaik, Alyssa Milburn, Sebastian Österlund, Pietro Frigo, Giorgi Maisuradze, Kaveh Razavi, Herbert Bos, Cristiano Giuffrida",
+            url: "https://mdsattacks.com/files/ridl-addendum.pdf",
+            conference: "Addendum to IEEE S&P 2019 paper",
+    },
     "Canella2019": {
             title: "Fallout: Leaking Data on Meltdown-Resistant CPUs",
             author: "Claudio Canella, Daniel Genkin, Lukas Giner, Daniel Gruss, Moritz Lipp, Marina Minkin, Daniel Moghimi, Frank Piessens, Michael Schwarz, Berk Sunar, Jo Van Bulck, Yuval Yarom",
@@ -99,11 +105,22 @@ var sources = {
             author: "Intel",
             title: "Deep Dive: Intel Analysis of Microarchitectural Data Sampling"
     },
+    "IntelTAA": {
+            url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-transactional-synchronization-extensions-intel-tsx-asynchronous-abort",
+            author: "Intel",
+            title: "Deep Dive: Intel Transactional Synchronization Extensions (Intel TSX) Asynchronous Abort"
+    },
     "Chen2019": {
             title: "SGXPECTRE: Stealing Intel Secrets from SGX Enclaves via Speculative Execution",
             author: "Guoxing Chen, Sanchuan Chen, Yuan Xiao, Yinqian Zhang, Zhiqiang Lin, Ten H. Lai",
             conference: "IEEE EuroS&P 2019",
             url: "https://arxiv.org/pdf/1802.09085.pdf"
-    }
+    },
+    "Falk2019": {
+            author: "Brandon Falk",
+            title: "CPU Introspection: Intel Load Port Snooping",
+            url: "https://gamozolabs.github.io/metrology/2019/12/30/load-port-monitor.html",
+            conference: "Gamozo Labs Blog",
+    },
 };
  

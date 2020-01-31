@@ -246,7 +246,7 @@ var data = [{
         title: "Meltdown-AC",
         alias: "",
         father: 3,
-        description: "Upon detecting an unaligned memory operand, the CPU may generate an alignment check exception (#AC). In our tests on Intel CPUs, we were unable to transiently encode the results of unaligned memory accesses. We suspect that this is because #AC is generated early in the pipeline, even before the operand’s virtual address is translated to a physical one. However, this appears not to be the case on some AMD and ARM microarchitectures, on which it is possible to transiently leak data after the exception.",
+        description: "Upon detecting an unaligned memory operand, the CPU may generate an alignment-check exception (#AC) when the EFLAGS.AC flag is set. In our tests on Intel CPUs, we were unable to transiently encode the results of unaligned memory accesses. We suspect that this is because #AC is generated early in the pipeline, even before the operand’s virtual address is translated to a physical one. However, this appears not to be the case on some AMD and ARM microarchitectures, on which it is possible to transiently leak data after the exception.",
         sources: [
             sources["Canella2018"]
         ],
@@ -263,6 +263,91 @@ var data = [{
                 title: "ARM",
             },
         ],
+        color: color.group
+    },
+    {
+        id: 67,
+        title: "Meltdown-AC-LFB",
+        alias: "RIDL",
+        img: "mds.svg",
+        father: 9,
+        description: "The RIDL addendum explained that misaligned loads due to the AC flag may leak data from line-fill buffers. Interestingly, in contrast to the main RIDL variant Meltdown-P-LFB exploiting page faults, Meltdown-AC-LFB may work even on processors enumerating RDCL_NO silicon mitigations.",
+        sources: [
+            sources["RIDLAddendum1"],
+            sources["VanSchaik2019"],
+            sources["IntelMDS"],
+        ],
+        names: [
+            {
+                title: "Rogue In-flight Data Load (RIDL) Addendum",
+                url: "https://mdsattacks.com/"
+            },
+            {
+                title: "Microarchitectural Fill Buffer Data Sampling (MFBDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+            {
+                title: "Microarchitectural Data Sampling (MDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+        ],
+        cve: [{
+            title: "CVE-2018-12130",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2018-12130"
+        }],
+        affects: [
+            {
+                title: "Intel",
+                url: "https://software.intel.com/security-software-guidance/software-guidance/microarchitectural-data-sampling"
+            },
+        ],
+        poc: [{
+            title: "https://github.com/vusec/ridl",
+            url: "https://github.com/vusec/ridl",
+        }],
+        color: color.works
+    },
+    {
+        id: 68,
+        title: "Meltdown-AC-LP",
+        alias: "RIDL",
+        img: "mds.svg",
+        father: 9,
+        description: "The RIDL addendum explained that misaligned loads due to the AC flag may leak data from load ports. Interestingly, in contrast to the main RIDL variant Meltdown-P-LFB exploiting page faults, Meltdown-AC-LP may work even on processors enumerating RDCL_NO silicon mitigations.",
+        sources: [
+            sources["RIDLAddendum1"],
+            sources["VanSchaik2019"],
+            sources["Falk2019"],
+            sources["IntelMDS"],
+        ],
+        names: [
+            {
+                title: "Rogue In-flight Data Load (RIDL) Addendum",
+                url: "https://mdsattacks.com/"
+            },
+            {
+                title: "Microarchitectural Load Port Data Sampling (MLPDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+            {
+                title: "Microarchitectural Data Sampling (MDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+        ],
+        cve: [{
+            title: "CVE-2018-12127",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2018-12127"
+        }],
+        affects: [
+            {
+                title: "Intel",
+                url: "https://software.intel.com/security-software-guidance/software-guidance/microarchitectural-data-sampling"
+            },
+        ],
+        poc: [{
+            title: "https://github.com/vusec/ridl",
+            url: "https://github.com/vusec/ridl",
+        }],
         color: color.works
     },
     {
@@ -434,11 +519,27 @@ var data = [{
     },
     {
         id: 19,
-        title: "Meltdown-PK-L1",
+        title: "Meltdown-PK",
         img: "pte-pk.svg",
         father: 11,
         description: "Intel Skylake-SP server CPUs support memory-protection keys for user space (PKU). This feature allows processes to change the access permissions of a page directly from user space, i.e., without requiring a syscall/hypercall. Thus, with PKU, user-space applications can implement efficient hardware-enforced isolation of trusted parts. A Meltdown-PK attack bypasses both the read and write isolation provided by the PKU. Meltdown-PK works if an attacker has code execution in the containing process, even if the attacker cannot execute the <code>wrpkru</code> instruction (e.g., blacklisting).",
-        todo: "We encourage exploring the possibility of using Meltdown-PK to leak data from other buffers apart from the L1 cache.",
+        todo: "We encourage exploring the possibility of using Meltdown-PK to leak data from other buffers apart from the L1 cache and store buffer.",
+        sources: [
+            sources["Canella2018"]
+        ],
+        affects: [
+            {
+                title: "Intel",
+                url: "https://software.intel.com/security-software-guidance/insights/more-information-transient-execution-findings",
+            },
+        ],
+        color: color.group
+    },
+    {
+        id: 70,
+        title: "Meltdown-PK-L1",
+        father: 19,
+        description: "As part of our systematic analysis, we presented a novel Meltdown-PK-L1 variant which bypasses both the read and write isolation provided by PKU to leak unauthorized data from the L1 cache.",
         sources: [
             sources["Canella2018"]
         ],
@@ -452,6 +553,42 @@ var data = [{
                 url: "https://software.intel.com/security-software-guidance/insights/more-information-transient-execution-findings",
             },
         ],
+        color: color.works
+    },
+    {
+        id: 71,
+        title: "Meltdown-PK-SB",
+        alias: "Fallout",
+        img: "mds.svg",
+        father: 19,
+        description: "The Fallout paper includes an experiment to leak data from the store buffer using a faulting load from a page marked as unreadable with PKU.",
+        sources: [
+            sources["Canella2019"]
+        ],
+        affects: [
+            {
+                title: "Intel",
+                url: "https://software.intel.com/security-software-guidance/insights/more-information-transient-execution-findings",
+            },
+        ],
+        names: [
+            {
+                title: "Fallout",
+                url: "https://mdsattacks.com/"
+            },
+            {
+                title: "Microarchitectural Store Buffer Data Sampling (MSBDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+            {
+                title: "Microarchitectural Data Sampling (MDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+        ],
+        cve: [{
+            title: "CVE-2018-12126",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2018-12126"
+        }],
         color: color.works
     },
     {
@@ -1042,7 +1179,7 @@ var data = [{
     {
         id: 43,
         title: "Meltdown-US-LFB",
-        alias: "ZombieLoad",
+        alias: "ZombieLoad v1",
         img: "zombieload.svg",
         father: 16,
         description: "ZombieLoad uses various architectural and microarchitectural faults to leak data from the fill buffers. In contrast to Meltdown-US-L1, only the least-significant 6 bits of the virtual address can be used to address the data, thus giving less control over which data is leaked. However, this allows ZombieLoad to cross all privilege boundaries (user-to-user, kernel, Intel SGX, VM-to-VM, VM-to-hypervisor).",
@@ -1235,6 +1372,10 @@ var data = [{
                 url: "https://software.intel.com/security-software-guidance/software-guidance/microarchitectural-data-sampling"
             },
         ],
+        poc: [{
+            title: "https://github.com/vusec/ridl",
+            url: "https://github.com/vusec/ridl",
+        }],
         color: color.works
     },
     {
@@ -1280,8 +1421,9 @@ var data = [{
         alias: "RIDL",
         img: "mds.svg",
         father: 17,
-        description: "Intel and the RIDL paper describe that faulting loads which span a 64-byte cacheline boundary may leak data from the processor's load ports.",
+        description: "Intel, the RIDL paper, and Brandon Falk describe that faulting loads which span a 64-byte cacheline boundary may leak data from the processor's load ports.",
         sources: [
+            sources["Falk2019"],
             sources["VanSchaik2019"],
             sources["IntelMDS"],
         ],
@@ -1309,6 +1451,10 @@ var data = [{
                 url: "https://software.intel.com/security-software-guidance/software-guidance/microarchitectural-data-sampling"
             },
         ],
+        poc: [{
+            title: "https://github.com/vusec/ridl",
+            url: "https://github.com/vusec/ridl",
+        }],
         color: color.works
     },
     {
@@ -1389,6 +1535,97 @@ var data = [{
         ],
         color: color.works
     },
+{
+        id: 59,
+        title: "Meltdown-AVX",
+        father: 15,
+        description: "Meltdown-AVX abuses #GP exceptions caused by misaligned AVX vector load instructions. According to Intel, faulting or assisting vector SSE/AVX loads that are more than 64 bits in size may leak data.",
+        color: color.works,
+        sources: [
+            sources["IntelMDS"],
+            sources["Canella2019"],
+            sources["RIDLAddendum1"],
+        ],
+        color: color.group
+},
+{
+        id: 65,
+        title: "Meltdown-AVX-SB",
+        alias: "Fallout",
+        img: "mds.svg",
+        father: 59,
+        description: "Meltdown-AVX-SB abuses #GP exceptions caused by misaligned AVX load instructions to read data from the store buffer.",
+        sources: [
+            sources["Canella2019"],
+        ],
+        names: [
+            {
+                title: "Fallout",
+                url: "https://mdsattacks.com/"
+            },
+            {
+                title: "Microarchitectural Store Buffer Data Sampling (MSBDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+            {
+                title: "Microarchitectural Data Sampling (MDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+        ],
+        cve: [{
+            title: "CVE-2018-12126",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2018-12126"
+        }],
+        affects: [
+            {
+                title: "Intel",
+                url: "https://software.intel.com/security-software-guidance/software-guidance/microarchitectural-data-sampling"
+            },
+        ],
+        color: color.works
+    },
+{
+        id: 66,
+        title: "Meltdown-AVX-LP",
+        alias: "RIDL",
+        img: "mds.svg",
+        father: 59,
+        description: "Meltdown-AVX-LP abuses #GP exceptions caused by misaligned AVX load instructions to read data from the load ports.",
+        sources: [
+            sources["RIDLAddendum1"],
+            sources["Falk2019"],
+            sources["IntelMDS"],
+        ],
+        names: [
+            {
+                title: "Rogue In-flight Data Load (RIDL) Addendum",
+                url: "https://mdsattacks.com/"
+            },
+            {
+                title: "Microarchitectural Load Port Data Sampling (MLPDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+            {
+                title: "Microarchitectural Data Sampling (MDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+        ],
+        cve: [{
+            title: "CVE-2018-12127",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2018-12127"
+        }],
+        affects: [
+            {
+                title: "Intel",
+                url: "https://software.intel.com/security-software-guidance/software-guidance/microarchitectural-data-sampling"
+            },
+        ],
+        poc: [{
+            title: "https://github.com/vusec/ridl",
+            url: "https://github.com/vusec/ridl",
+        }],
+        color: color.works
+    },
     {
         id: 52,
         title: "Meltdown-MCA",
@@ -1427,7 +1664,7 @@ var data = [{
     {
         id: 55,
         title: "Meltdown-AD-LFB",
-        alias: "ZombieLoad",
+        alias: "ZombieLoad v3",
         img: "zombieload.svg",
         father: 53,
         description: "ZombieLoad uses various architectural and microarchitectural faults to leak data from the fill buffers. In contrast to Meltdown-US-L1, only the least-significant 6 bits of the virtual address can be used to address the data, thus giving less control over which data is leaked. However, this allows ZombieLoad to cross all privilege boundaries (user-to-user, kernel, Intel SGX, VM-to-VM, VM-to-hypervisor). In this variant, the exploited fault is the microcode assist required for setting the accessed or dirty bit in a page-table entry.",
@@ -1525,46 +1762,17 @@ var data = [{
         }],
         color: color.todo
     },
-    {
-        id: 59,
-        title: "Meltdown-AVX-LP",
-        father: 52,
-        description: "According to Intel, certain vector SSE/AVX loads that are more than 64 bits in size may leak data from the processor's load ports.",
-        todo: "We encourage investigation of using AVX loads to leak data from other buffers.",
-        sources: [
-            sources["IntelMDS"],
-        ],
-        names: [
-            {
-                title: "Microarchitectural Load Port Data Sampling (MLPDS)",
-                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
-            },
-            {
-                title: "Microarchitectural Data Sampling (MDS)",
-                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
-            },
-        ],
-        cve: [{
-            title: "CVE-2018-12127",
-            url: "https://nvd.nist.gov/vuln/detail/CVE-2018-12127"
-        }],
-        affects: [
-            {
-                title: "Intel",
-                url: "https://software.intel.com/security-software-guidance/software-guidance/microarchitectural-data-sampling"
-            },
-        ],
-        color: color.works
-    },
-    {
+        {
         id: 60,
         title: "Meltdown-TAA",
         father: 52,
         description: "Attackers might attempt to abuse TSX asynchronous aborts (TAA) to leak CPU data from the fill buffer, store buffer, and load ports.",
-        alias: "ZombieLoad v2",
+        alias: "ZombieLoad v2, RIDL",
         img: "zombieload.svg",
         sources: [
             sources["Schwarz2019"],
+            sources["RIDLAddendum1"],
+            sources["IntelTAA"],
         ],
         names: [
             {
@@ -1576,9 +1784,9 @@ var data = [{
                 url: "https://zombieloadattack.com/"
             },
             {
-                title: "RIDL Addendum",
-                url: "https://mdsattacks.com/files/ridl-addendum.pdf"
-            }
+                title: "Rogue In-flight Data Load (RIDL) Addendum",
+                url: "https://mdsattacks.com/"
+            },
         ],
         cve: [{
             title: "CVE-2019-11135",
@@ -1595,6 +1803,7 @@ var data = [{
         img: "zombieload.svg",
         sources: [
             sources["Schwarz2019"],
+            sources["RIDLAddendum1"],
         ],
         names: [
             {
@@ -1606,13 +1815,21 @@ var data = [{
                 url: "https://zombieloadattack.com/"
             },
             {
-                title: "RIDL Addendum",
-                url: "https://mdsattacks.com/files/ridl-addendum.pdf"
-            }
+                title: "Rogue In-flight Data Load (RIDL) Addendum",
+                url: "https://mdsattacks.com/"
+            },
         ],
         cve: [{
             title: "CVE-2019-11135",
             url: "https://nvd.nist.gov/vuln/detail/CVE-2019-11135"
+        }],
+        poc: [{
+            title: "https://github.com/IAIK/ZombieLoad",
+            url: "https://github.com/IAIK/ZombieLoad/"
+        },
+        {
+            title: "https://github.com/vusec/ridl",
+            url: "https://github.com/vusec/ridl",
         }],
         color: color.works
     },
@@ -1625,6 +1842,9 @@ var data = [{
         img: "zombieload.svg",
         sources: [
             sources["Schwarz2019"],
+            sources["RIDLAddendum1"],
+            sources["Falk2019"],
+            sources["IntelMDS"],
         ],
         names: [
             {
@@ -1636,13 +1856,21 @@ var data = [{
                 url: "https://zombieloadattack.com/"
             },
             {
-                title: "RIDL Addendum",
-                url: "https://mdsattacks.com/files/ridl-addendum.pdf"
-            }
+                title: "Rogue In-flight Data Load (RIDL) Addendum",
+                url: "https://mdsattacks.com/"
+            },
         ],
         cve: [{
             title: "CVE-2019-11135",
             url: "https://nvd.nist.gov/vuln/detail/CVE-2019-11135"
+        }],
+        poc: [{
+            title: "https://github.com/IAIK/ZombieLoad",
+            url: "https://github.com/IAIK/ZombieLoad/"
+        },
+        {
+            title: "https://github.com/vusec/ridl",
+            url: "https://github.com/vusec/ridl",
         }],
         color: color.works
     },
@@ -1655,6 +1883,7 @@ var data = [{
         img: "zombieload.svg",
         sources: [
             sources["Schwarz2019"],
+            sources["RIDLAddendum1"],
         ],
         names: [
             {
@@ -1670,9 +1899,91 @@ var data = [{
                 url: "https://mdsattacks.com/files/ridl-addendum.pdf"
             }
         ],
+        poc: [{
+            title: "https://github.com/IAIK/ZombieLoad",
+            url: "https://github.com/IAIK/ZombieLoad/"
+        },
+        {
+            title: "https://github.com/vusec/ridl",
+            url: "https://github.com/vusec/ridl",
+        }],
         cve: [{
             title: "CVE-2019-11135",
             url: "https://nvd.nist.gov/vuln/detail/CVE-2019-11135"
+        }],
+        color: color.works
+    },
+    {
+        id: 72,
+        title: "Meltdown-PRM-LFB",
+        father: 52,
+        alias: "ZombieLoad v4",
+        img: "zombieload.svg",
+        description: "SGX-enabled processors trigger a microcode assist whenever an address translationresolves into SGX's Processor Reserved Memory (PRM) area and the CPU is outside enclave mode. While this ensures that the load instruction always reads 0xff at the architectural level, we found however that unauthorized line-fill buffer entries accessed by the sibling logical core may still be transiently dereferenced before abort page semantics are applied.",
+        todo: "We encourage investigation of using SGX processor-reserved memory to leak data from other buffers.",
+        sources: [
+            sources["Schwarz2019"],
+        ],
+        names: [
+            {
+                title: "ZombieLoad v4",
+                url: "https://zombieloadattack.com/"
+            },
+            {
+                title: "Microarchitectural Fill Buffer Data Sampling (MFBDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+            {
+                title: "Microarchitectural Data Sampling (MDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+        ],
+        cve: [{
+            title: "CVE-2018-12130",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2018-12130"
+        }],
+        affects: [
+            {
+                title: "Intel",
+                url: "https://software.intel.com/security-software-guidance/software-guidance/microarchitectural-data-sampling"
+            },
+        ],
+        poc: [{
+            title: "https://github.com/IAIK/ZombieLoad/",
+            url: "https://github.com/IAIK/ZombieLoad/tree/master/attacker/variant4_linux"
+        }],
+        color: color.works
+    },
+    {
+        id: 73,
+        title: "Meltdown-UC-LFB",
+        father: 52,
+        alias: "ZombieLoad v5",
+        img: "zombieload.svg",
+        description: "The ZombieLoad paper includes a variant that uses a memory page which is marked as uncacheable. As the page-miss handler issues a microcode assist when page tables are in uncacheable memory, we can leak data from the line-fill buffer. Likewise, the original Meltdown paper includes an experiment to leak victim data which is marked as uncacheable.",
+        todo: "We encourage investigation of using uncacheable memory pages to leak data from other buffers.",
+        sources: [
+            sources["Schwarz2019"],
+            sources["Lipp2018"],
+            sources["IntelMDS"],
+        ],
+        names: [
+            {
+                title: "ZombieLoad v5",
+                url: "https://zombieloadattack.com/"
+            },
+            {
+                title: "Microarchitectural Data Sampling Uncacheable Memory (MDSUM)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+            {
+                title: "Microarchitectural Data Sampling (MDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+        ],
+        cve: [{
+            title: "CVE-2019-11091",
+            url: "https://nvd.nist.gov/vuln/detail/CVE-2019-11091"
         }],
         color: color.works
     },
