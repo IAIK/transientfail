@@ -1823,6 +1823,13 @@ var data = [{
             title: "CVE-2019-11135",
             url: "https://nvd.nist.gov/vuln/detail/CVE-2019-11135"
         }],
+        affects: [
+            {
+                title: "Intel",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-transactional-synchronization-extensions-intel-tsx-asynchronous-abort"
+
+            },
+        ],
         poc: [{
             title: "https://github.com/IAIK/ZombieLoad",
             url: "https://github.com/IAIK/ZombieLoad/"
@@ -1858,6 +1865,13 @@ var data = [{
             {
                 title: "Rogue In-flight Data Load (RIDL) Addendum",
                 url: "https://mdsattacks.com/"
+            },
+        ],
+        affects: [
+            {
+                title: "Intel",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-transactional-synchronization-extensions-intel-tsx-asynchronous-abort"
+
             },
         ],
         cve: [{
@@ -1898,6 +1912,13 @@ var data = [{
                 title: "RIDL Addendum",
                 url: "https://mdsattacks.com/files/ridl-addendum.pdf"
             }
+        ],
+        affects: [
+            {
+                title: "Intel",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-transactional-synchronization-extensions-intel-tsx-asynchronous-abort"
+
+            },
         ],
         poc: [{
             title: "https://github.com/IAIK/ZombieLoad",
@@ -1978,6 +1999,12 @@ var data = [{
             },
             {
                 title: "Microarchitectural Data Sampling (MDS)",
+                url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
+            },
+        ],
+        affects: [
+            {
+                title: "Intel",
                 url: "https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-microarchitectural-data-sampling"
             },
         ],
