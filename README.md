@@ -1,6 +1,8 @@
 # Transient Fail
 
-Transient Fail is a project that gathers different proof-of-concept implementations of Transient Execution Attacks.
+Transient Fail is a project that gathers different proof-of-concept implementations of Transient Execution Attacks. It was originally developed for our Usenix 2019 paper
+
+[A Systematic Evaluation of Transient Execution Attacks and Defenses](http://cc0x1f.net/publications/transient_sytematization.pdf) by Canella, Van Bulck, Schwarz, Lipp, von Berg, Ortner, Piessens, Evtyushkin and Gruss
 
 ## Content
 This project provides two different things:
