@@ -509,9 +509,6 @@ var data = [{
                 url: "https://www.intel.com/content/www/us/en/support/articles/000029382/processors.html"
             },
             {
-                title: "AMD",
-            },
-            {
                 title: "ARM",
             }
         ],
