@@ -1,9 +1,9 @@
 .desc_top {
-    position: absolute;
+    position: fixed;
     top: -3em;
 }
 .desc_bottom {
-    position: absolute;
+    position: fixed;
     top: 3em;
 }
 .node {
@@ -13,7 +13,6 @@
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    position: absolute;
     z-index: 99;
 }
 .highlight {

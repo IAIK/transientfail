@@ -1937,7 +1937,7 @@ var data = [{
         father: 52,
         alias: "ZombieLoad v4",
         img: "zombieload.svg",
-        description: "SGX-enabled processors trigger a microcode assist whenever an address translationresolves into SGX's Processor Reserved Memory (PRM) area and the CPU is outside enclave mode. While this ensures that the load instruction always reads 0xff at the architectural level, we found however that unauthorized line-fill buffer entries accessed by the sibling logical core may still be transiently dereferenced before abort page semantics are applied.",
+        description: "SGX-enabled processors trigger a microcode assist whenever an address translation resolves into SGX's Processor Reserved Memory (PRM) area and the CPU is outside enclave mode. While this ensures that the load instruction always reads 0xff at the architectural level, we found however that unauthorized line-fill buffer entries accessed by the sibling logical core may still be transiently dereferenced before abort page semantics are applied.",
         todo: "We encourage investigation of using SGX processor-reserved memory to leak data from other buffers.",
         sources: [
             sources["Schwarz2019"],
