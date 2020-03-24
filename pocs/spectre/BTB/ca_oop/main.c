@@ -26,7 +26,7 @@
 #define ARRAY_OFFSET(i) ((i)*ARRAY_OFF + (char*)useless_array)
 #define CACHE_TARGET_ARRAY_SIZE (2 * ARRAY_OFF * 256)
 
-#define SECERT 'S'
+#define SECRET 'S'
 
 char *asm_slow_jmp =  "mov $%zd, %%rax\n\t"
                       "mov $%zd, %%rbx\n\t"
