@@ -19,9 +19,9 @@ So far, we only support Linux with gcc on x86 and ARMv8. Therefore, we have only
 
 ## Literature
 
-* [Meltdown](meltdownattack.com)
-* [Spectre](spectreattack.com)
-* [Foreshadow](foreshadowattack.eu)
+* [Meltdown](https://meltdownattack.com)
+* [Spectre](https://spectreattack.com)
+* [Foreshadow](https://foreshadowattack.eu)
 * [Systematic Evaluation](https://www.usenix.org/conference/usenixsecurity19/presentation/canella)
 * [SpectreReturns](https://www.usenix.org/conference/woot18/presentation/koruyeh)
 * [ret2spec](https://arxiv.org/pdf/1807.10364.pdf)
