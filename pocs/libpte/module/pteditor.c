@@ -1,6 +1,10 @@
+#include <linux/mm_types.h>
 #include <asm/tlbflush.h>
 #include <asm/uaccess.h>
+#include <asm/io.h>
 #include <linux/fs.h>
+#include <linux/fs.h>
+#include <linux/kallsyms.h>
 #include <linux/miscdevice.h>
 #include <linux/mm.h>
 #include <linux/module.h>
@@ -8,6 +12,15 @@
 #include <linux/ptrace.h>
 #include <linux/proc_fs.h>
 #include <linux/kprobes.h>
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+#include <linux/mmap_lock.h>
+#endif
+
+#ifdef CONFIG_PAGE_TABLE_ISOLATION
+pgd_t __attribute__((weak)) __pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd);
+#endif
+
 
 #include "pteditor.h"
 
@@ -17,6 +30,13 @@ MODULE_LICENSE("GPL");
 
 #if defined(__aarch64__)
 #include <linux/hugetlb.h>
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
+typedef pgdval_t p4dval_t;
+#endif
+
+void __attribute__((weak)) set_swapper_pgd(pgd_t* pgdp, pgd_t pgd) {}
+pgd_t __attribute__((weak)) swapper_pg_dir[PTRS_PER_PGD];
 
 static inline pte_t native_make_pte(pteval_t val)
 {
@@ -37,6 +57,13 @@ static inline pud_t native_make_pud(pudval_t val)
 {
   return __pud(val);
 }
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
+
+static inline p4d_t native_make_p4d(p4dval_t val)
+{
+  return __p4d(val);
+}
+#endif
 
 static inline pteval_t native_pte_val(pte_t pte)
 {
@@ -44,11 +71,19 @@ static inline pteval_t native_pte_val(pte_t pte)
 }
 
 static inline int pud_large(pud_t pud) {
-  return pud_huge(pud);
+#ifdef __PAGETABLE_PMD_FOLDED 
+    return pud_val(pud) && !(pud_val(pud) & PUD_TABLE_BIT);
+#else
+    return 0;
+#endif
 }
 
 static inline int pmd_large(pmd_t pmd) {
-  return pmd_huge(pmd);
+#ifdef __PAGETABLE_PMD_FOLDED
+    return pmd_val(pmd) && !(pmd_val(pmd) & PMD_TABLE_BIT)
+#else
+    return 0;
+#endif
 }
 #endif
 
@@ -58,6 +93,28 @@ static inline int pmd_large(pmd_t pmd) {
 #else
 #define from_user copy_from_user
 #define to_user copy_to_user
+#endif
+
+#ifdef pr_fmt
+#undef pr_fmt
+#endif
+#define pr_fmt(fmt) "[pteditor-module] " fmt
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 7, 0)
+unsigned long kallsyms_lookup_name(const char* name) {
+  struct kprobe kp = {
+    .symbol_name	= name,
+  };
+
+  int ret = register_kprobe(&kp);
+  if (ret < 0) {
+    return 0;
+  };
+
+  unregister_kprobe(&kp);
+
+  return (unsigned long) kp.addr;
+}
 #endif
 
 typedef struct {
@@ -77,14 +134,15 @@ typedef struct {
 static bool device_busy = false;
 static bool mm_is_locked = false;
 
+void (*invalidate_tlb)(unsigned long);
+void (*flush_tlb_mm_range_func)(struct mm_struct*, unsigned long, unsigned long, unsigned int, bool);
+static struct mm_struct* get_mm(size_t);
+
 static int device_open(struct inode *inode, struct file *file) {
   /* Check if device is busy */
   if (device_busy == true) {
     return -EBUSY;
   }
-
-  /* Lock module */
-  try_module_get(THIS_MODULE);
 
   device_busy = true;
 
@@ -94,8 +152,6 @@ static int device_open(struct inode *inode, struct file *file) {
 static int device_release(struct inode *inode, struct file *file) {
   /* Unlock module */
   device_busy = false;
-
-  module_put(THIS_MODULE);
 
   return 0;
 }
@@ -108,15 +164,32 @@ _invalidate_tlb(void *addr) {
   unsigned long cr4;
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 2, 98)
+#if defined(X86_FEATURE_INVPCID_SINGLE) && defined(INVPCID_TYPE_INDIV_ADDR)
   if (cpu_feature_enabled(X86_FEATURE_INVPCID_SINGLE)) {
     for(pcid = 0; pcid < 4096; pcid++) {
       invpcid_flush_one(pcid, (long unsigned int) addr);
     }
-  } else {
+  } 
+  else 
+#endif
+  {
     raw_local_irq_save(flags);
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 8, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 0, 0)
+    cr4 = native_read_cr4();
+#else
     cr4 = this_cpu_read(cpu_tlbstate.cr4);
+#endif
+#else
+    cr4 = __read_cr4();
+#endif
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 8, 0)
     native_write_cr4(cr4 & ~X86_CR4_PGE);
     native_write_cr4(cr4);
+#else
+    __write_cr4(cr4 & ~X86_CR4_PGE);
+    __write_cr4(cr4);
+#endif
     raw_local_irq_restore(flags);
   }
 #else
@@ -131,8 +204,13 @@ _invalidate_tlb(void *addr) {
 }
 
 static void
-invalidate_tlb(unsigned long addr) {
+invalidate_tlb_custom(unsigned long addr) {
   on_each_cpu(_invalidate_tlb, (void*) addr, 1);
+}
+
+static void
+invalidate_tlb_kernel(unsigned long addr) {
+  flush_tlb_mm_range_func(get_mm(task_pid_nr(current)), addr, addr + PAGE_SIZE, PAGE_SHIFT, false);
 }
 
 static void _set_pat(void* _pat) {
@@ -189,7 +267,11 @@ static int resolve_vm(size_t addr, vm_t* entry, int lock) {
   }
 
   /* Lock mm */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+  if(lock) mmap_read_lock(mm);
+#else
   if(lock) down_read(&mm->mmap_sem);
+#endif
 
   /* Return PGD (page global directory) entry */
   entry->pgd = pgd_offset(mm, addr);
@@ -238,6 +320,7 @@ static int resolve_vm(size_t addr, vm_t* entry, int lock) {
   /* Map PTE (page table entry) */
   entry->pte = pte_offset_map(entry->pmd, addr);
   if (entry->pte == NULL || pmd_large(*(entry->pmd))) {
+    entry->pte = NULL;
     goto error_out;
   }
   entry->valid |= PTEDIT_VALID_MASK_PTE;
@@ -246,14 +329,22 @@ static int resolve_vm(size_t addr, vm_t* entry, int lock) {
   pte_unmap(entry->pte);
 
   /* Unlock mm */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+  if(lock) mmap_read_unlock(mm);
+#else
   if(lock) up_read(&mm->mmap_sem);
+#endif
 
   return 0;
 
 error_out:
 
   /* Unlock mm */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+  if(lock) mmap_read_unlock(mm);
+#else
   if(lock) up_read(&mm->mmap_sem);
+#endif
 
   return 1;
 }
@@ -268,42 +359,50 @@ static int update_vm(ptedit_entry_t* new_entry, int lock) {
   old_entry.pid = new_entry->pid;
 
   /* Lock mm */
-  if(lock) down_read(&mm->mmap_sem);
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+  if(lock) mmap_write_lock(mm);
+#else
+  if(lock) down_write(&mm->mmap_sem);
+#endif
 
   resolve_vm(addr, &old_entry, 0);
 
   /* Update entries */
   if((old_entry.valid & PTEDIT_VALID_MASK_PGD) && (new_entry->valid & PTEDIT_VALID_MASK_PGD)) {
-      printk("[pteditor-module] Updating PGD\n");
+      pr_warn("Updating PGD\n");
       set_pgd(old_entry.pgd, native_make_pgd(new_entry->pgd));
   }
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
   if((old_entry.valid & PTEDIT_VALID_MASK_P4D) && (new_entry->valid & PTEDIT_VALID_MASK_P4D)) {
-      printk("[pteditor-module] Updating P4D\n");
+      pr_warn("Updating P4D\n");
       set_p4d(old_entry.p4d, native_make_p4d(new_entry->p4d));
   }
 #endif
 
   if((old_entry.valid & PTEDIT_VALID_MASK_PMD) && (new_entry->valid & PTEDIT_VALID_MASK_PMD)) {
-      printk("[pteditor-module] Updating PMD\n");
+      pr_warn("Updating PMD\n");
       set_pmd(old_entry.pmd, native_make_pmd(new_entry->pmd));
   }
 
   if((old_entry.valid & PTEDIT_VALID_MASK_PUD) && (new_entry->valid & PTEDIT_VALID_MASK_PUD)) {
-      printk("[pteditor-module] Updating PUD\n");
+      pr_warn("Updating PUD\n");
       set_pud(old_entry.pud, native_make_pud(new_entry->pud));
   }
 
   if((old_entry.valid & PTEDIT_VALID_MASK_PTE) && (new_entry->valid & PTEDIT_VALID_MASK_PTE)) {
-      printk("[pteditor-module] Updating PTE\n");
+      pr_warn("Updating PTE\n");
       set_pte(old_entry.pte, native_make_pte(new_entry->pte));
   }
 
   invalidate_tlb(addr);
 
   /* Unlock mm */
-  if(lock) up_read(&mm->mmap_sem);
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+  if(lock) mmap_write_unlock(mm);
+#else
+  if(lock) up_write(&mm->mmap_sem);
+#endif
 
   return 0;
 }
@@ -314,10 +413,13 @@ static void vm_to_user(ptedit_entry_t* user, vm_t* vm) {
 #if CONFIG_PGTABLE_LEVELS > 4
     if(vm->p4d) user->p4d = (vm->p4d)->p4d;
 #else
+#if !defined(__ARCH_HAS_5LEVEL_HACK)
     if(vm->p4d) user->p4d = (vm->p4d)->pgd.pgd;
+#else
+    if(vm->p4d) user->p4d = (vm->p4d)->pgd;    
 #endif
 #endif
-
+#endif
 #if defined(__i386__) || defined(__x86_64__)
     if(vm->pgd) user->pgd = (vm->pgd)->pgd;
     if(vm->pmd) user->pmd = (vm->pmd)->pmd;
@@ -357,10 +459,16 @@ static long device_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
     {
         struct mm_struct *mm = current->active_mm;
         if(mm_is_locked) {
-            printk("[pteditor-module] VM is already locked\n");
+            pr_warn("VM is already locked\n");
             return -1;
         }
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+        mmap_write_lock(mm);
+        mmap_read_lock(mm);
+#else
+        down_write(&mm->mmap_sem);
         down_read(&mm->mmap_sem);
+#endif
         mm_is_locked = true;
         return 0;
     }
@@ -368,10 +476,16 @@ static long device_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
     {
         struct mm_struct *mm = current->active_mm;
         if(!mm_is_locked) {
-            printk("[pteditor-module] VM is not locked\n");
+            pr_warn("VM is not locked\n");
             return -1;
         }
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+        mmap_write_unlock(mm);
+        mmap_read_unlock(mm);
+#else
+        up_write(&mm->mmap_sem);
         up_read(&mm->mmap_sem);
+#endif
         mm_is_locked = false;
         return 0;
     }
@@ -397,9 +511,17 @@ static long device_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
         (void)from_user(&paging, (void*)ioctl_param, sizeof(paging));
         mm = get_mm(paging.pid);
         if(!mm) return 1;
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+        if(!mm_is_locked) mmap_read_lock(mm);
+#else
         if(!mm_is_locked) down_read(&mm->mmap_sem);
+#endif
         paging.root = virt_to_phys(mm->pgd);
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+        if(!mm_is_locked) mmap_read_unlock(mm);
+#else
         if(!mm_is_locked) up_read(&mm->mmap_sem);
+#endif
         (void)to_user((void*)ioctl_param, &paging, sizeof(paging));
         return 0;
     }
@@ -411,9 +533,17 @@ static long device_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
         (void)from_user(&paging, (void*)ioctl_param, sizeof(paging));
         mm = get_mm(paging.pid);
         if(!mm) return 1;
-        if(!mm_is_locked) down_read(&mm->mmap_sem);
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+        if(!mm_is_locked) mmap_write_lock(mm);
+#else
+        if(!mm_is_locked) down_write(&mm->mmap_sem);
+#endif
         mm->pgd = (pgd_t*)phys_to_virt(paging.root);
-        if(!mm_is_locked) up_read(&mm->mmap_sem);
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0)
+        if(!mm_is_locked) mmap_write_unlock(mm);
+#else
+        if(!mm_is_locked) up_write(&mm->mmap_sem);
+#endif
         return 0;
     }
     case PTEDITOR_IOCTL_CMD_GET_PAGESIZE:
@@ -442,6 +572,13 @@ static long device_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
         set_pat(ioctl_param);
         return 0;
     }
+    case PTEDITOR_IOCTL_CMD_SWITCH_TLB_INVALIDATION:
+    {
+      if((int)ioctl_param != PTEDITOR_TLB_INVALIDATION_KERNEL && (int)ioctl_param != PTEDITOR_TLB_INVALIDATION_CUSTOM)
+        return -1;
+      invalidate_tlb = ((int)ioctl_param == PTEDITOR_TLB_INVALIDATION_KERNEL) ? invalidate_tlb_kernel : invalidate_tlb_custom;
+      return 0;
+    }
 
     default:
         return -1;
@@ -450,7 +587,8 @@ static long device_ioctl(struct file *file, unsigned int ioctl_num, unsigned lon
   return 0;
 }
 
-static struct file_operations f_ops = {.unlocked_ioctl = device_ioctl,
+static struct file_operations f_ops = {.owner = THIS_MODULE,
+                                       .unlocked_ioctl = device_ioctl,
                                        .open = device_open,
                                        .release = device_release};
 
@@ -461,12 +599,37 @@ static struct miscdevice misc_dev = {
     .mode = S_IRWXUGO,
 };
 
-#if !defined(__aarch64__)
-static struct file_operations umem_fops = {.owner = THIS_MODULE};
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 6, 0)
+static struct proc_ops umem_ops = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 7, 0)
+  .proc_flags = 0,
+#endif
+  .proc_open = NULL,
+  .proc_read = NULL,
+  .proc_write = NULL,
+  .proc_lseek = NULL,
+  .proc_release = NULL,
+  .proc_poll = NULL,
+  .proc_ioctl = NULL,
+#ifdef CONFIG_COMPAT
+  .proc_compat_ioctl = NULL,
+#endif
+  .proc_mmap = NULL,
+  .proc_get_unmapped_area = NULL,
+};
+#define OP_lseek lseek
+#define OPCAT(a, b) a ## b
+#define OPS(o) OPCAT(umem_ops.proc_, o)
+#else
+static struct file_operations umem_ops = {.owner = THIS_MODULE};
+#define OP_lseek llseek
+#define OPS(o) umem_ops.o
+#endif
 
 static int open_umem(struct inode *inode, struct file *filp) { return 0; }
 static int has_umem = 0;
 
+#if !defined(__aarch64__)
 static const char *devmem_hook = "devmem_is_allowed";
 
 
@@ -486,35 +649,41 @@ int init_module(void) {
   /* Register device */
   r = misc_register(&misc_dev);
   if (r != 0) {
-    printk(KERN_ALERT "[pteditor-module] Failed registering device with %d\n", r);
+    pr_alert("Failed registering device with %d\n", r);
     return 1;
   }
-  
+
+  flush_tlb_mm_range_func = (void *) kallsyms_lookup_name("flush_tlb_mm_range");
+  if(!flush_tlb_mm_range_func) {
+    pr_alert("Could not retrieve flush_tlb_mm_range function\n");
+  }
+  invalidate_tlb = invalidate_tlb_kernel;
+
 #if !defined(__aarch64__)
   probe_devmem.kp.symbol_name = devmem_hook;
 
   if (register_kretprobe(&probe_devmem) < 0) {
-    printk(KERN_ALERT "[pteditor-module] Could not bypass /dev/mem restriction\n");
+    pr_alert("Could not bypass /dev/mem restriction\n");
   } else {
-    printk(KERN_INFO "[pteditor-module] /dev/mem is now superuser read-/writable\n");
-  }
-  
-  umem_fops.llseek = (void*)kallsyms_lookup_name("memory_lseek");
-  umem_fops.read = (void*)kallsyms_lookup_name("read_mem");
-  umem_fops.write = (void*)kallsyms_lookup_name("write_mem");
-  umem_fops.mmap = (void*)kallsyms_lookup_name("mmap_mem");
-  umem_fops.open = open_umem;
-
-  if (!umem_fops.llseek || !umem_fops.read || !umem_fops.write ||
-      !umem_fops.mmap || !umem_fops.open) {
-    printk(KERN_ALERT"[pteditor-module] Could not create unprivileged memory access\n");
-  } else {
-    proc_create("umem", 0666, NULL, &umem_fops);
-    printk(KERN_INFO "[pteditor-module] Unprivileged memory access via /proc/umem set up\n");
-    has_umem = 1;
+    pr_info("/dev/mem is now superuser read-/writable\n");
   }
 #endif
-  printk(KERN_INFO "[pteditor-module] Loaded.\n");
+
+  OPS(OP_lseek) = (void*)kallsyms_lookup_name("memory_lseek");
+  OPS(read) = (void*)kallsyms_lookup_name("read_mem");
+  OPS(write) = (void*)kallsyms_lookup_name("write_mem");
+  OPS(mmap) = (void*)kallsyms_lookup_name("mmap_mem");
+  OPS(open) = open_umem;
+
+  if (!OPS(OP_lseek) || !OPS(read) || !OPS(write) ||
+      !OPS(mmap) || !OPS(open)) {
+    pr_alert("Could not create unprivileged memory access\n");
+  } else {
+    proc_create("umem", 0666, NULL, &umem_ops);
+    pr_info("Unprivileged memory access via /proc/umem set up\n");
+    has_umem = 1;
+  }
+  pr_info("Loaded.\n");
 
   return 0;
 }
@@ -524,11 +693,11 @@ void cleanup_module(void) {
   
 #if !defined(__aarch64__)
   unregister_kretprobe(&probe_devmem);
-  
+#endif
+
   if (has_umem) {
-    printk(KERN_INFO "[pteditor-module] Remove unprivileged memory access\n");
+    pr_info("Remove unprivileged memory access\n");
     remove_proc_entry("umem", NULL);
   }
-#endif
-  printk(KERN_INFO "[pteditor-module] Removed.\n");
+  pr_info("Removed.\n");
 }
