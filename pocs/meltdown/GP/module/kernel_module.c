@@ -6,6 +6,8 @@
 #include <linux/seq_file.h>
 #include <linux/slab.h>
 #include <linux/uaccess.h>
+#include <asm-generic/io.h>
+#include <linux/version.h>
 
 static unsigned long cr3_val = 0;
 
@@ -66,16 +68,24 @@ static int my_proc_open(struct inode *inode, struct file *file) {
   return single_open(file, my_proc_show, NULL);
 }
 
-static struct file_operations my_fops = {.owner = THIS_MODULE,
-                                         .open = my_proc_open,
-                                         .release = single_release,
-                                         .read = seq_read,
-                                         .llseek = seq_lseek,
-                                         .write = my_proc_write};
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 6, 0)
+static struct proc_ops my_ops = {.proc_open = my_proc_open,
+                                 .proc_release = single_release,
+                                 .proc_read = seq_read,
+                                 .proc_lseek = seq_lseek,
+                                 .proc_write = my_proc_write};
+#else
+static struct file_operations my_ops = {.owner = THIS_MODULE,
+                                        .open = my_proc_open,
+                                        .release = single_release,
+                                        .read = seq_read,
+                                        .llseek = seq_lseek,
+                                        .write = my_proc_write};
+#endif
 
 static int __init hello_init(void) {
   struct proc_dir_entry *entry;
-  entry = proc_create("cr3", 0777, NULL, &my_fops);
+  entry = proc_create("cr3", 0777, NULL, &my_ops);
   if(!entry) {
     return -1;
   } else {
