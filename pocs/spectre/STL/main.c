@@ -9,7 +9,7 @@
 #include <linux/seccomp.h>
 
 
-#include "libcache/cacheutils.h"
+#include "../../libcache/cache.c"
 
 // inaccessible (overwritten) secret
 #define SECRET      "INACCESSIBLE SECRET"
