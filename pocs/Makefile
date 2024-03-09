@@ -39,7 +39,7 @@ meltdown/AC: meltdown/AC/main.c libcache/cacheutils.h
 meltdown/BR: meltdown/BR/main.c libcache/cacheutils.h
 	cd meltdown/BR && make
 
-spectre/pht/sa_ip: spectre/PHT/sa_ip/main.c
+spectre/pht/sa_ip: spectre/PHT/sa_ip/main.c libcache/cacheutils.h
 	cd spectre/PHT/sa_ip && make
 
 spectre/pht/sa_oop: spectre/PHT/sa_oop/main.c libcache/cacheutils.h
